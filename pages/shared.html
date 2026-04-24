@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shared Expenses - Expense Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="bg-light">
+  <main class="profile-page py-5">
+    <div class="container">
+      <div class="row gy-4">
+        <!-- Sidebar -->
+        <div class="col-lg-3">
+          <div class="sidebar-panel p-4 shadow-sm">
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div class="profile-avatar">👤</div>
+              <div>
+                <h5 class="mb-1 profile-heading">John Doe</h5>
+                <p class="mb-0 text-muted">john@example.com</p>
+              </div>
+            </div>
+            <div class="sidebar-nav">
+              <div class="list-group list-group-flush">
+                <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
+                <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+                <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
+                <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
+                <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
+                                                <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
+                <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
+                <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-9">
+          <div class="profile-panel p-4 shadow-sm mb-4">
+            <h2 class="fw-bold mb-1">Shared Expenses</h2>
+            <p class="text-muted mb-4">Manage and track shared expenses with ease.</p>
+
+            <div class="row g-4">
+              <!-- Create Expense Card -->
+              <div class="col-md-6">
+                <div class="card shadow-sm p-4">
+                  <h5 class="fw-bold mb-3">Create Expense Card</h5>
+                  <form>
+                    <div class="mb-3">
+                      <label for="expenseName" class="form-label">Expense Name</label>
+                      <input type="text" class="form-control" id="expenseName" placeholder="Expense Name" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="amount" class="form-label">Amount ($)</label>
+                      <input type="number" class="form-control" id="amount" placeholder="$" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="searchUsers" class="form-label">Search Users</label>
+                      <input type="text" class="form-control" id="searchUsers" placeholder="Search Users" />
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Selected Members</label>
+                      <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-success">Adam Die <button type="button" class="btn-close btn-close-white btn-sm ms-2"></button></span>
+                        <span class="badge bg-success">Alex & Eli <button type="button" class="btn-close btn-close-white btn-sm ms-2"></button></span>
+                        <span class="badge bg-success">Utility <button type="button" class="btn-close btn-close-white btn-sm ms-2"></button></span>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Split Preview</label>
+                      <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Adam Die <span class="badge bg-success">$32.28</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Alex & Eli <span class="badge bg-success">$32.28</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Utility <span class="badge bg-success">$32.28</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Add Expense</button>
+                  </form>
+                </div>
+              </div>
+
+              <!-- My Share Summary Card -->
+              <div class="col-md-6">
+                <div class="card shadow-sm p-4">
+                  <h5 class="fw-bold mb-3">My Share Summary Card</h5>
+                  <p class="mb-2">Total Group Spending: <span class="text-success">$322.83</span></p>
+                  <p class="mb-2">You Owe: <span class="text-danger">$54.44</span></p>
+                  <p class="mb-0">You are Owed: <span class="text-success">$120.00</span></p>
+                </div>
+              </div>
+
+              <!-- Members List Card -->
+              <div class="col-12">
+                <div class="card shadow-sm p-4">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0">Members</h5>
+                    <button class="btn btn-outline-success btn-sm">+ Invite</button>
+                  </div>
+                  <div class="row g-3">
+                    <div class="col-6 col-md-4 col-lg-3">
+                      <div class="text-center p-3 rounded-4" style="background: rgba(45, 212, 191, 0.08);">
+                        <div class="rounded-circle mx-auto mb-2" style="width: 48px; height: 48px; background: #0f766e; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">AD</div>
+                        <h6 class="mb-0">Adam Die</h6>
+                        <small class="text-muted">$120.00</small>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3">
+                      <div class="text-center p-3 rounded-4" style="background: rgba(45, 212, 191, 0.08);">
+                        <div class="rounded-circle mx-auto mb-2" style="width: 48px; height: 48px; background: #0f766e; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">A</div>
+                        <h6 class="mb-0">Alex</h6>
+                        <small class="text-muted">$80.00</small>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3">
+                      <div class="text-center p-3 rounded-4" style="background: rgba(45, 212, 191, 0.08);">
+                        <div class="rounded-circle mx-auto mb-2" style="width: 48px; height: 48px; background: #0f766e; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">E</div>
+                        <h6 class="mb-0">Eli</h6>
+                        <small class="text-muted">$80.00</small>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3">
+                      <div class="text-center p-3 rounded-4" style="background: rgba(45, 212, 191, 0.08);">
+                        <div class="rounded-circle mx-auto mb-2" style="width: 48px; height: 48px; background: #0f766e; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">U</div>
+                        <h6 class="mb-0">Utility</h6>
+                        <small class="text-muted">$42.83</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Shared Expenses List Card -->
+              <div class="col-12">
+                <div class="card shadow-sm p-4">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0">Shared Expenses List Card</h5>
+                    <button class="btn btn-outline-success btn-sm">Settle Balance</button>
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Search" />
+                  </div>
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Expense Name</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Split</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Internet Bill</td>
+                        <td>01/22</td>
+                        <td>$80.00</td>
+                        <td>Alex $80.00</td>
+                      </tr>
+                      <tr>
+                        <td>Dinner Out</td>
+                        <td>01/22</td>
+                        <td>$150.00</td>
+                        <td>Alex & Eli, $80.00</td>
+                      </tr>
+                      <tr>
+                        <td>Utilities</td>
+                        <td>01/22</td>
+                        <td>$210.00</td>
+                        <td>$80.00</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

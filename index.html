@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-light">
+  <header class="py-3">
+    <nav class="container navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand fw-bold fs-4" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px;"><circle cx="4" cy="4" r="2" fill="#FF6B6B"/><circle cx="12" cy="4" r="2" fill="#FFA500"/><circle cx="4" cy="12" r="2" fill="#4ECDC4"/><circle cx="12" cy="12" r="2" fill="#45B7D1"/></svg>Expense Tracker</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="pages/features.html">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/contact.html">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-success rounded-pill ms-3 px-4" href="pages/login.html">Log In</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-section position-relative overflow-hidden pb-5">
+      <div class="hero-bg position-absolute top-0 start-50 translate-middle-x"></div>
+      <div class="container py-5">
+        <div class="row align-items-center gy-5">
+          <div class="col-lg-6">
+            <p class="text-success fw-semibold text-uppercase mb-3">Expense Tracker</p>
+            <h1 class="display-5 fw-bold">Track Every Penny, Effortlessly.</h1>
+            <p class="lead text-muted">Take control of your finances with our intuitive expense tracking tool. Simplify budgeting and reach your goals.</p>
+            <a href="pages/signup.html" class="btn btn-success btn-lg rounded-pill px-5">Get Started</a>
+          </div>
+          <div class="col-lg-6">
+            <div class="card feature-card border-0 rounded-5 shadow-lg p-4">
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="bg-success bg-opacity-10 text-success rounded-4 px-3 py-2">Overview</div>
+                <div class="d-flex gap-2">
+                  <span class="dot bg-success"></span>
+                  <span class="dot bg-warning"></span>
+                  <span class="dot bg-danger"></span>
+                </div>
+              </div>
+              <div class="row gy-3">
+                <div class="col-6">
+                  <div class="bg-light rounded-4 p-3 text-center">
+                    <div class="icon-circle mb-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="bi bi-graph-up mb-2" viewBox="0 0 24 24"><path d="M4 19h16M4 15l5-5 4 4 7-7"></path><path d="M18 11l3-3"></path></svg>
+                    </div>
+                    <p class="mb-1 text-uppercase text-muted small">Analytics</p>
+                    <h6 class="mb-0">12% growth</h6>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="bg-light rounded-4 p-3 text-center">
+                    <div class="icon-circle mb-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="bi bi-wallet mb-2" viewBox="0 0 24 24"><path d="M3 7h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"></path><path d="M3 7V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"></path></svg>
+                    </div>
+                    <p class="mb-1 text-uppercase text-muted small">Balance</p>
+                    <h6 class="mb-0">$3,820</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-4 p-3 rounded-4 bg-white border border-1">
+                <div class="d-flex justify-content-between mb-3">
+                  <span class="fw-semibold">This month</span>
+                  <span class="text-success">+8.4%</span>
+                </div>
+                <div class="progress" style="height: 10px;">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container py-5">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold">Mode Selection</h2>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-5 col-xl-4">
+          <div class="card mode-card border-0 rounded-4 shadow-sm h-100 p-4 text-center">
+            <div class="icon-circle mb-3 mx-auto bg-success bg-opacity-15 text-success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-mortarboard" viewBox="0 0 16 16"><path d="M8 0a.5.5 0 0 0-.41.217L.8 6.32a.5.5 0 0 0 0 .76l6.79 4.924a.5.5 0 0 0 .441 0l6.79-4.924a.5.5 0 0 0 0-.76L8.41.217A.5.5 0 0 0 8 0zm0 1.04 5.695 4.127L8 9.155 2.305 5.167 8 1.04z"/><path d="M2.5 9.178v2.572c0 .42.55.719 1.175.719h9.65c.626 0 1.175-.3 1.175-.72V9.178l-6.5 4.713L2.5 9.178z"/></svg>
+            </div>
+            <h5 class="fw-semibold">Student</h5>
+            <p class="text-muted mb-0">Take control of your finances with our student-focused goals.</p>
+          </div>
+        </div>
+        <div class="col-md-5 col-xl-4">
+          <div class="card mode-card border-0 rounded-4 shadow-sm h-100 p-4 text-center">
+            <div class="icon-circle mb-3 mx-auto bg-success bg-opacity-15 text-success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M2 14s1-1.5 6-1.5S14 14 14 14s-1-4-6-4-6 4-6 4z"/></svg>
+            </div>
+            <h5 class="fw-semibold">General</h5>
+            <p class="text-muted mb-0">Take control of your finances with our in‑house intuitive goals.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container pb-5">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold">Features</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-xl-4">
+          <div class="card feature-card border-0 rounded-4 shadow-sm h-100 p-4">
+            <div class="card-icon mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-grid-3x3-gap" viewBox="0 0 16 16"><path d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2zm6 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V2zm6 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2zM1 8a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V8zm6 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V8zm6 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V8zM1 14a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-2zm6 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-2zm6 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2z"/></svg>
+            </div>
+            <h5 class="fw-semibold">Smart Categorization</h5>
+            <p class="text-muted mb-0">Severe caroruz smart categorization sirsia sized or maintwn categorization.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="card feature-card border-0 rounded-4 shadow-sm h-100 p-4">
+            <div class="card-icon mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bar-chart-line" viewBox="0 0 16 16"><path d="M0 0h1v15h15v1H0V0zm4 8h1v7H4V8zm4-4h1v11H8V4zm4 6h1v5h-1V10z"/></svg>
+            </div>
+            <h5 class="fw-semibold">Insightful Analytics</h5>
+            <p class="text-muted mb-0">Enter dode mataxiss or analytics silhae repattans and insightful analytics.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="card feature-card border-0 rounded-4 shadow-sm h-100 p-4">
+            <div class="card-icon mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16"><path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5z"/><path d="M5 9.5h6V10H5v-.5zm0-1.5h6V8H5V8zm0-1.5h6V6H5V6z"/></svg>
+            </div>
+            <h5 class="fw-semibold">Easy Reporting</h5>
+            <p class="text-muted mb-0">Exact amgevo caze manting and examlin cora siajn reporting key reporting.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="card feature-card border-0 rounded-4 shadow-sm h-100 p-4">
+            <div class="card-icon mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-target" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 8 8A8 8 0 0 0 8 0zm0 2a6 6 0 1 1-6 6A6 6 0 0 1 8 2z"/><path d="M8 4a4 4 0 1 0 4 4A4 4 0 0 0 8 4zm0 1a3 3 0 1 1-3 3A3 3 0 0 1 8 5z"/></svg>
+            </div>
+            <h5 class="fw-semibold">Goal Setting</h5>
+            <p class="text-muted mb-0">Clear-innacurer dirimetors, inegritful satkinq, and insightufl analytics.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="card feature-card border-0 rounded-4 shadow-sm h-100 p-4">
+            <div class="card-icon mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-shield-lock" viewBox="0 0 16 16"><path d="M5.5 8.5a1.5 1.5 0 0 1 3 0V10h-3V8.5z"/><path d="M8 0c-.69 0-1.374.086-2.03.254a1 1 0 0 0-.777.962C4.942 4.56 4.3 5.66 3.38 6.577a2.965 2.965 0 0 0-.801 2.05c0 3.03 1.267 5.45 3.001 6.92a1.5 1.5 0 0 0 1.84 0C10.74 14.076 12 11.657 12 8.627a2.965 2.965 0 0 0-.801-2.05C10.2 5.66 9.558 4.56 9.807 1.216a1 1 0 0 0-.777-.962A7.982 7.982 0 0 0 8 0z"/></svg>
+            </div>
+            <h5 class="fw-semibold">Secure Data</h5>
+            <p class="text-muted mb-0">Secure data poures semoopisacas oo coosting data.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="card feature-card border-0 rounded-4 shadow-sm h-100 p-4">
+            <div class="card-icon mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-phone" viewBox="0 0 16 16"><path d="M11 1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/><path d="M8 13.5a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5z"/></svg>
+            </div>
+            <h5 class="fw-semibold">Multi-Device Sync</h5>
+            <p class="text-muted mb-0">Eventire more flixxnat cloud devie aprcans with xanyant and ixarr-device device.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
