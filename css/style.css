@@ -2,6 +2,10 @@
   background: radial-gradient(circle at top, rgba(123,210,165,.16), transparent 35%), radial-gradient(circle at top right, rgba(88,169,143,.1), transparent 28%), #f7fbfb;
   color: #0f172a;
 }
+/* Mobile fixed header spacing */
+body > main {
+  padding-top: 70px;
+}
 .hero-section {
   min-height: 85vh;
 }
