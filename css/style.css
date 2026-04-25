@@ -421,3 +421,23 @@ textarea.form-control {
 .auth-note a:hover {
   text-decoration: underline;
 }
+/* Mobile offcanvas menu links */
+.offcanvas .nav-link {
+  color: #1f2937; /* dark gray instead of blue */
+  font-size: 18px;
+  font-weight: 500;
+  padding: 12px 0;
+  transition: all 0.2s ease;
+}
+
+
+.offcanvas .nav-link:hover {
+  color: #198754; /* your green theme */
+  transform: translateX(5px);
+}
+
+
+.offcanvas .nav-link.active {
+  color: #198754;
+  font-weight: 600;
+}
