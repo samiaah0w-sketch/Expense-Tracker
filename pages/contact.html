@@ -98,28 +98,29 @@
               <h3 class="fw-bold mb-4">Contact Form</h3>
               
               <div class="contact-form">
-                <form action="Supportexpensetracker@gmail.com" method="POST"></form>
-                  <!-- Name Field -->
-                  <div class="mb-4">
-                    <input type="text" class="form-control" id="nameInput" name="name" placeholder="Enter your name" required />
-                  </div>
+  <form id="contactForm">
+    
+    <!-- Name -->
+    <div class="mb-4">
+      <input type="text" class="form-control" id="nameInput" name="name" placeholder="Enter your name" required />
+    </div>
 
-                  <!-- Email Field -->
-                  <div class="mb-4">
-                    <input type="email" class="form-control is-invalid" id="emailInput" name="email" placeholder="Enter your email" required />
-                    <div class="invalid-feedback d-block">Email is required</div>
-                  </div>
+    <!-- Email -->
+    <div class="mb-4">
+      <input type="email" class="form-control" id="emailInput" name="email" placeholder="Enter your email" required />
+      <div class="invalid-feedback">Email is required</div>
+    </div>
 
-                  <!-- Message Field -->
-                  <div class="mb-4">
-                   <textarea class="form-control" id="messageInput" name="message" placeholder="Enter your message" rows="5"></textarea>
-                  </div>
-                  <!-- Submit Button -->
-                   <input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_template" value="table">
-                  <button type="submit" class="btn btn-success submit-btn rounded-pill">Send Message</button>
-                </form>
-              </div>
+    <!-- Message -->
+    <div class="mb-4">
+      <textarea class="form-control" id="messageInput" name="message" placeholder="Enter your message" rows="5"></textarea>
+    </div>
+<!-- Message Box -->
+<div id="formMessage" class="alert d-none mt-3" role="alert"></div>
+    <button type="submit" class="btn btn-success submit-btn rounded-pill">Send Message</button>
+
+  </form>
+</div>
             </div>
 
             <!-- Contact Information -->
@@ -181,7 +182,8 @@
       </div>
     </div>
   </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="../js/mail.js"></script>
 </body>
 </html>

@@ -8,10 +8,54 @@
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body class="bg-light">
+  <!-- Mobile Sidebar (Offcanvas) -->
+  <div class="offcanvas offcanvas-start mobile-sidebar" tabindex="-1" id="mobileSidebar">
+    <div class="offcanvas-header">
+      <h5 class="fw-bold">Menu</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="user-info">
+      <div class="d-flex align-items-center gap-3">
+        <div class="user-avatar">👤</div>
+        <div>
+          <h6 class="mb-0 fw-bold">John Doe</h6>
+          <p class="mb-0 text-muted small">john@example.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="offcanvas-body">
+      <div class="nav-menu">
+        <div class="list-group list-group-flush">
+          <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
+          <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+          <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
+          <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
+          <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
+          <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
+          <a href="profile.html" class="list-group-item list-group-item-action active">Profile</a>
+          <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Header -->
+  <header class="py-2 d-lg-none fixed-top bg-white shadow-sm">
+    <div class="container d-flex align-items-center justify-content-between">
+      <button class="btn border-0 p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
+      </button>
+      <span class="fw-bold text-success">Expense Tracker</span>
+      <a href="profile.html" class="btn p-0">
+        <div style="width: 32px; height: 32px; display: grid; place-items: center; border-radius: 8px; background: rgba(45, 212, 191, 0.2); color: #0f766e;">👤</div>
+      </a>
+    </div>
+  </header>
+
   <main class="profile-page py-5">
     <div class="container">
       <div class="row gy-4">
-        <div class="col-lg-3">
+        <div class="col-lg-3 d-none d-lg-block">
           <div class="sidebar-panel p-4 shadow-sm">
             <div class="d-flex align-items-center gap-3 mb-4">
               <div class="profile-avatar">👤</div>
