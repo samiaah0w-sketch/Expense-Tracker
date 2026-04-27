@@ -30,7 +30,9 @@
             <li class="mb-2"><i class="bi bi-wallet2 me-2 text-success"></i>Study budget</li>
             <li class="mb-2"><i class="bi bi-calendar2-event-fill me-2 text-success"></i>Tuition reminders</li>
           </ul>
-          <a href="dashboard.html?mood=student" class="btn btn-success w-100 py-2 fw-semibold" style="border-radius: 0.75rem;">Select Student Mood</a>
+          <button class="btn btn-success w-100 py-2 fw-semibold selectMood" data-mood="student">
+  Select Student Mood
+</button>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-5">
@@ -48,23 +50,78 @@
             <li class="mb-2"><i class="bi bi-people-fill me-2 text-info"></i>Family budget</li>
             <li class="mb-2"><i class="bi bi-graph-up-arrow me-2 text-info"></i>Tax & reports</li>
           </ul>
-          <a href="dashboard.html?mood=general" class="btn btn-info w-100 py-2 fw-semibold text-white" style="border-radius: 0.75rem;">Select General Mood</a>
+          <button class="btn btn-info w-100 py-2 fw-semibold text-white selectMood" data-mood="general">
+  Select General Mood
+</button>
         </div>
       </div>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script>
-    const name = localStorage.getItem("tempName");
+const supabaseClient = supabase.createClient(
+  "https://zwziuzioivscsslccncl.supabase.co",
+  "YOUR_ANON_KEY"
+);
 
-const { data: { user } } = await supabase.auth.getUser();
+// ✅ Check if already selected
+$(document).ready(async function () {
 
-await supabase.from("profiles").insert({
-  id: user.id,
-  full_name: name,
-  mood: selectedMood
+  const { data: { user } } = await supabaseClient.auth.getUser();
+
+  if (!user) {
+    alert("Please login first");
+    window.location.href = "login.html";
+    return;
+  }
+
+  // 🔍 Check if mood already exists
+  const { data, error } = await supabaseClient
+    .from("users")
+    .select("mode")
+    .eq("id", user.id)
+    .single();
+
+  if (data && data.mode) {
+    // Already selected → redirect
+    window.location.href = "dashboard.html";
+  }
+
 });
-  </script>
+
+// ✅ Handle mood selection
+$(".selectMood").on("click", async function () {
+
+  const selectedMood = $(this).data("mood");
+
+  const { data: { user } } = await supabaseClient.auth.getUser();
+
+  if (!user) {
+    alert("User not found");
+    return;
+  }
+
+  // 💾 Save in database
+  const { error } = await supabaseClient
+    .from("users")
+    .update({ mode: selectedMood })
+    .eq("id", user.id);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  // 💾 Save in localStorage (fast access)
+  localStorage.setItem("mode", selectedMood);
+
+  alert("Mood selected successfully!");
+
+  // 🚀 Redirect
+  window.location.href = "dashboard.html";
+});
+</script>
 </body>
 </html>
