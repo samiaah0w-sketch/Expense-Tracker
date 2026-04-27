@@ -107,7 +107,7 @@
               <div id="msgBox" class="alert d-none mt-3"></div>
               <button type="submit" class="btn btn-success signup-button">Create Account</button>
             </form>
-            <p class="text-center auth-note mt-4 mb-0">Already have account? <a href="login.html">Login</a></p>
+            <p class="text-center auth-note mt-4 mb-0">Already have account? <a href="../login.html">Login</a></p>
             <p class="text-center auth-note mt-2 mb-0"><a href="../index.html">Back to Home</a></p>
           </div>
         </div>
@@ -150,9 +150,23 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
 const supabaseClient = supabase.createClient(
   "https://zwziuzioivscsslccncl.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
+);
+function showMessage(text, type){
+  const msg = document.getElementById("msgBox");
+  msg.className = "alert alert-" + type + " mt-3";
+  msg.innerText = text;
+  msg.classList.remove("d-none");
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const supabaseClient = supabase.createClient(
+  "https://zwziuzioivscsslccncl.supabase.co",
+  "YOUR_ANON_KEY"
 );
 
 function showMessage(text, type){
@@ -162,25 +176,20 @@ function showMessage(text, type){
   msg.classList.remove("d-none");
 }
 
-document.getElementById("signupForm").addEventListener("submit", async function(e) {
+document.getElementById("signupForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const name = fullName.value.trim();
   const email = signupEmail.value.trim();
-  const password = signupPassword.value;
-  const confirm = confirmPassword.value;
-
-  if (!name || !email || !password) {
-    showMessage("All fields are required", "danger");
-    return;
-  }
+  const password = signupPassword.value.trim();
+  const confirm = confirmPassword.value.trim();
 
   if (password !== confirm) {
     showMessage("Passwords do not match", "danger");
     return;
   }
 
-  // ✅ SIGNUP
+  // 1️⃣ Create auth user
   const { data, error } = await supabaseClient.auth.signUp({
     email,
     password
@@ -191,35 +200,30 @@ document.getElementById("signupForm").addEventListener("submit", async function(
     return;
   }
 
-  // ⚠️ IMPORTANT: use data.user directly
-  const user = data.user;
+  // ⚠️ Wait until session is ready
+  let user = data.user;
 
   if (!user) {
-    showMessage("Signup succeeded. Please verify email.", "warning");
-    return;
+    const res = await supabaseClient.auth.getUser();
+    user = res.data.user;
   }
 
-  // ✅ INSERT INTO USERS TABLE
+  // 2️⃣ Insert into users table (RLS safe)
   const { error: dbError } = await supabaseClient
     .from("users")
-    .insert([
-      {
-        id: user.id,
-        name: name,
-        email: email
-      }
-    ]);
+    .insert({
+      id: user.id,
+      name: name,
+      email: email
+    });
 
   if (dbError) {
     showMessage(dbError.message, "danger");
     return;
   }
 
-  showMessage("Signup successful! Redirecting...", "success");
-
-  setTimeout(() => {
-    window.location.href = "register.html";
-  }, 1500);
+  // 3️⃣ Go to mood page
+  window.location.href = "register.html";
 });
 </script>
 </body>

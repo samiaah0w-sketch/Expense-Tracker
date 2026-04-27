@@ -16,10 +16,10 @@
     </div>
     <div class="user-info">
       <div class="d-flex align-items-center gap-3">
-        <div class="user-avatar">👤</div>
+        <div class="user-avatar" id="mobile-avatar">👤</div>
         <div>
-          <h6 class="mb-0 fw-bold">John Doe</h6>
-          <p class="mb-0 text-muted small">john@example.com</p>
+          <h6 class="mb-0 fw-bold profile-heading"></h6>
+          <p class="mb-0 text-muted small user-email"></p>
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- Mobile Header -->
   <header class="py-2 d-lg-none fixed-top bg-white shadow-sm">
     <div class="container d-flex align-items-center justify-content-between">
@@ -47,21 +47,21 @@
       </button>
       <span class="fw-bold text-success">Expense Tracker</span>
       <a href="profile.html" class="btn p-0">
-        <div style="width: 32px; height: 32px; display: grid; place-items: center; border-radius: 8px; background: rgba(45, 212, 191, 0.2); color: #0f766e;">👤</div>
+        <div style="width:32px;height:32px;display:grid;place-items:center;border-radius:8px;background:rgba(45,212,191,0.2);color:#0f766e;">👤</div>
       </a>
     </div>
   </header>
-
+ 
   <main class="profile-page py-5">
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-3 d-none d-lg-block">
           <div class="sidebar-panel p-4 shadow-sm">
             <div class="d-flex align-items-center gap-3 mb-4">
-              <div class="profile-avatar">👤</div>
+              <div class="profile-avatar" id="sidebar-avatar">👤</div>
               <div>
-                <h5 class="mb-1 profile-heading">John Doe</h5>
-                <p class="mb-0 text-muted">john@example.com</p>
+                <h5 class="mb-1 profile-heading"></h5>
+                <p class="mb-0 text-muted user-email"></p>
               </div>
             </div>
             <div class="sidebar-nav">
@@ -71,41 +71,53 @@
                 <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
                 <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
                 <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
-                                <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
+                <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
                 <a href="profile.html" class="list-group-item list-group-item-action active">Profile</a>
-
                 <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
               </div>
             </div>
           </div>
         </div>
-
+ 
         <div class="col-lg-9">
           <div class="profile-panel p-4 shadow-sm mb-4">
             <h2 class="fw-bold mb-1">Profile & Settings</h2>
             <p class="text-muted mb-4">Manage your account preferences.</p>
-
+ 
             <div class="row mb-4">
               <div class="col-12">
                 <div class="photo-card p-4 mb-3">
                   <div class="d-flex flex-column flex-sm-row align-items-center gap-4">
-                    <div class="profile-avatar profile-avatar-xl">👤</div>
-                    <div class="flex-grow-1">
-                      <h5 class="fw-semibold mb-2">Profile photo</h5>
-                      <p class="text-muted mb-3">Upload a profile photo to personalize your account. You can remove it at any time.</p>
-                      <div class="d-flex flex-wrap gap-2">
-                        <label class="btn btn-outline-success mb-0">
-                          Upload photo
-                          <input type="file" class="form-control d-none" accept="image/*" />
-                        </label>
-                        <button type="button" class="btn btn-outline-danger delete-button">Delete photo</button>
+ 
+                    <!-- Avatar with spinner overlay -->
+                    <div style="position:relative;flex-shrink:0;">
+                      <div class="profile-avatar profile-avatar-xl" id="main-avatar">👤</div>
+                      <div id="avatar-spinner" style="display:none;position:absolute;inset:0;background:rgba(255,255,255,0.8);border-radius:50%;align-items:center;justify-content:center;">
+                        <div class="spinner-border spinner-border-sm text-success" role="status"></div>
                       </div>
                     </div>
+ 
+                    <div class="flex-grow-1">
+                      <h5 class="fw-semibold mb-2">Profile photo</h5>
+                      <p class="text-muted mb-3">Upload a profile photo to personalize your account. Max size 2 MB.</p>
+ 
+                      <!-- photo-specific alert -->
+                      <div id="photoMsg" class="alert d-none mb-3" role="alert"></div>
+ 
+                      <div class="d-flex flex-wrap gap-2">
+                        <label class="btn btn-outline-success mb-0" id="upload-label">
+                          <span id="upload-label-text">Upload photo</span>
+                          <input type="file" id="photo-input" class="d-none" accept="image/png,image/jpeg,image/jpg,image/webp" />
+                        </label>
+                        <button type="button" class="btn btn-outline-danger" id="delete-btn">Delete photo</button>
+                      </div>
+                    </div>
+ 
                   </div>
                 </div>
               </div>
             </div>
-
+ 
             <div class="row g-4">
               <div class="col-md-6">
                 <div class="settings-card p-4 h-100">
@@ -113,27 +125,27 @@
                   <form>
                     <div class="mb-3">
                       <label class="form-label">Full Name</label>
-                      <input type="text" class="form-control" value="John Doe" />
+                      <input type="text" class="form-control" value="" />
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Email</label>
-                      <input type="email" class="form-control" value="john@example.com" />
+                      <input type="email" class="form-control" value="" />
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Preferred Currency</label>
                       <select class="form-select">
                         <option selected>USD ($)</option>
-                       <option value="BDT">৳ Taka (BDT)</option>
+                        <option value="BDT">৳ Taka (BDT)</option>
                       </select>
                     </div>
                     <button type="button" class="btn btn-success signup-button">Save Changes</button>
+                    <div id="profileMsg" class="alert d-none mt-3" role="alert"></div>
                   </form>
                 </div>
               </div>
-
+ 
               <div class="col-md-6">
                 <div class="settings-card p-4 h-100">
-                  
                   <div class="form-check form-switch mb-4">
                     <input class="form-check-input" type="checkbox" id="budgetAlertSwitch" checked>
                     <label class="form-check-label" for="budgetAlertSwitch">Budget Notifications</label>
@@ -143,7 +155,7 @@
               </div>
             </div>
           </div>
-
+ 
           <div class="activity-card p-4 shadow-sm">
             <div class="d-flex justify-content-between align-items-center mb-3">
               <div>
@@ -177,7 +189,204 @@
       </div>
     </div>
   </main>
-
+ 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+ 
+  <script>
+    const supabaseClient = supabase.createClient(
+      "https://zwziuzioivscsslccncl.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
+    );
+ 
+    let currentUser = null;
+ 
+    // ── avatar helpers ─────────────────────────────────────────
+    function setAvatarAll(url) {
+      const imgHTML = url
+        ? `<img src="${url}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`
+        : "👤";
+      document.getElementById("main-avatar").innerHTML    = imgHTML;
+      document.getElementById("sidebar-avatar").innerHTML = imgHTML;
+      document.getElementById("mobile-avatar").innerHTML  = imgHTML;
+    }
+ 
+    function setBusy(busy) {
+      const spinner   = document.getElementById("avatar-spinner");
+      const label     = document.getElementById("upload-label");
+      const deleteBtn = document.getElementById("delete-btn");
+      const input     = document.getElementById("photo-input");
+ 
+      spinner.style.display = busy ? "flex" : "none";
+      label.classList.toggle("disabled", busy);
+      deleteBtn.disabled = busy;
+      input.disabled     = busy;
+      document.getElementById("upload-label-text").textContent = busy ? "Uploading…" : "Upload photo";
+    }
+ 
+    function showPhotoMsg(text, type = "success") {
+      const box = document.getElementById("photoMsg");
+      box.className = `alert alert-${type}`;
+      box.innerText = text;
+      box.classList.remove("d-none");
+      setTimeout(() => box.classList.add("d-none"), 3500);
+    }
+ 
+    function showMsg(text, type = "success") {
+      const box = document.getElementById("profileMsg");
+      box.className = `alert alert-${type} mt-3`;
+      box.innerText = text;
+      box.classList.remove("d-none");
+      setTimeout(() => box.classList.add("d-none"), 2500);
+    }
+ 
+    // ── load user data ─────────────────────────────────────────
+    async function loadUser() {
+      const { data: { user } } = await supabaseClient.auth.getUser();
+      if (!user) return location.href = "login.html";
+      currentUser = user;
+ 
+      const { data } = await supabaseClient
+        .from("users")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+ 
+      if (!data) return;
+ 
+      document.querySelectorAll(".profile-heading")
+        .forEach(el => el.innerText = data.name || user.email || "");
+      document.querySelectorAll(".user-email")
+        .forEach(el => el.innerText = data.email || user.email || "");
+ 
+      document.querySelector("input[type='text']").value  = data.name    || "";
+      document.querySelector("input[type='email']").value = data.email   || user.email || "";
+      document.querySelector("select").value              = data.currency || "USD";
+      document.getElementById("budgetAlertSwitch").checked = data.notify_budget || false;
+ 
+      setAvatarAll(data.avatar_url || null);
+    }
+ 
+    // ── upload photo ───────────────────────────────────────────
+    async function uploadPhoto(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+ 
+      if (file.size > 2 * 1024 * 1024) {
+        showPhotoMsg("File too large. Maximum size is 2 MB.", "danger");
+        e.target.value = "";
+        return;
+      }
+ 
+      setBusy(true);
+      try {
+        const ext      = file.name.split(".").pop().toLowerCase();
+        const filePath = `${currentUser.id}/avatar.${ext}`;
+ 
+        // upload to Supabase Storage (upsert = overwrite old file)
+        const { error: uploadErr } = await supabaseClient.storage
+          .from("avatars")
+          .upload(filePath, file, { upsert: true, contentType: file.type });
+ 
+        if (uploadErr) throw uploadErr;
+ 
+        // get public URL with cache-bust so browser reloads the new image
+        const { data: urlData } = supabaseClient.storage
+          .from("avatars")
+          .getPublicUrl(filePath);
+ 
+        const publicUrl = urlData.publicUrl + "?t=" + Date.now();
+ 
+        // save to users table
+        const { error: dbErr } = await supabaseClient
+          .from("users")
+          .update({ avatar_url: publicUrl })
+          .eq("id", currentUser.id);
+ 
+        if (dbErr) throw dbErr;
+ 
+        setAvatarAll(publicUrl);
+        showPhotoMsg("Profile photo updated ✅");
+      } catch (err) {
+        console.error(err);
+        showPhotoMsg("Upload failed: " + (err.message || "unknown error"), "danger");
+      } finally {
+        setBusy(false);
+        e.target.value = ""; // reset input so same file can be re-chosen
+      }
+    }
+ 
+    // ── delete photo ───────────────────────────────────────────
+    async function deletePhoto() {
+      if (!confirm("Are you sure you want to remove your profile photo?")) return;
+ 
+      setBusy(true);
+      try {
+        // try removing all extension variants (we don't know which was uploaded)
+        const paths = ["png", "jpg", "jpeg", "webp"]
+          .map(ext => `${currentUser.id}/avatar.${ext}`);
+ 
+        await supabaseClient.storage.from("avatars").remove(paths);
+        // (storage remove errors are ignored — file may not exist for all exts)
+ 
+        // clear avatar_url in DB
+        const { error: dbErr } = await supabaseClient
+          .from("users")
+          .update({ avatar_url: null })
+          .eq("id", currentUser.id);
+ 
+        if (dbErr) throw dbErr;
+ 
+        setAvatarAll(null);
+        showPhotoMsg("Profile photo removed.");
+      } catch (err) {
+        console.error(err);
+        showPhotoMsg("Delete failed: " + (err.message || "unknown error"), "danger");
+      } finally {
+        setBusy(false);
+      }
+    }
+ 
+    // ── save profile details ───────────────────────────────────
+    async function saveProfile() {
+      const name     = document.querySelector("input[type='text']").value.trim();
+      const currency = document.querySelector("select").value;
+      const notify   = document.getElementById("budgetAlertSwitch").checked;
+ 
+      const { error } = await supabaseClient
+        .from("users")
+        .update({ name, currency, notify_budget: notify })
+        .eq("id", currentUser.id);
+ 
+      if (error) {
+        showMsg("Save failed: " + error.message, "danger");
+      } else {
+        document.querySelectorAll(".profile-heading").forEach(el => el.innerText = name);
+        showMsg("Profile updated successfully ✅");
+      }
+    }
+ 
+    // ── init ───────────────────────────────────────────────────
+    document.addEventListener("DOMContentLoaded", async () => {
+      await loadUser();
+ 
+      document.querySelector(".signup-button")
+        .addEventListener("click", saveProfile);
+ 
+      document.getElementById("photo-input")
+        .addEventListener("change", uploadPhoto);
+ 
+      document.getElementById("delete-btn")
+        .addEventListener("click", deletePhoto);
+ 
+      document.querySelectorAll("a[href='../index.html']").forEach(btn => {
+        btn.addEventListener("click", async (e) => {
+          e.preventDefault();
+          await supabaseClient.auth.signOut();
+          window.location.href = "../index.html";
+        });
+      });
+    });
+  </script>
 </body>
 </html>

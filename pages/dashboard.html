@@ -18,8 +18,8 @@
       <div class="d-flex align-items-center gap-3">
         <div class="user-avatar">👤</div>
         <div>
-         <h5 class="mb-1 profile-heading" id="profileName">Loading...</h5>
-<p class="mb-0 text-muted" id="profileEmail">Loading...</p>
+          <h6 class="mb-0 fw-bold">John Doe</h6>
+          <p class="mb-0 text-muted small">john@example.com</p>
         </div>
       </div>
     </div>
@@ -85,27 +85,32 @@
         <div class="col-lg-9">
           <!-- Student Mood Dashboard -->
           <div id="student-dashboard" style="display:none;">
-            <h2 class="fw-bold mb-4 mt-2">Dashboard</h2>
+            <h2 class="fw-bold mb-4 mt-2">Mood & Wellness Overview</h2>
             <div class="row g-4 mb-4">
-          <div class="col-12">
-  <div class="card shadow-sm p-4 dashboard-goal-card">
-    
-    <h4 class="text-white fw-bold text-center mb-4">
-      Weekly Wellness Goal
-    </h4>
-
-    <div class="progress dashboard-progress mx-auto">
-      <div class="progress-bar bg-success" style="width:65%"></div>
-    </div>
-
-    <div class="d-flex justify-content-between mt-2 text-white small">
-      <span>0%</span>
-      <span>65%</span>
-      <span>100%</span>
-    </div>
-
-  </div>
-</div>
+              <div class="col-12">
+                <div class="card shadow-sm p-4 d-flex flex-md-row align-items-center justify-content-between" style="background: linear-gradient(120deg, #6dd5ed 0%, #2193b0 100%, #fff 100%); border-radius: 1.5rem;">
+                  <div>
+                    <div class="text-white-50 mb-1">Current Mood</div>
+                    <div class="d-flex align-items-center">
+                      <span class="fs-2 fw-bold text-white">Groodnt</span>
+                      <span class="ms-2 fs-2">&#128578;</span>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-md-5">
+                    <div class="mb-2 fw-semibold text-white">Weekly Wellness Goal</div>
+                    <div class="d-flex align-items-center">
+                      <div class="progress flex-grow-1 me-3" style="height: 12px; background: #e0f7fa;">
+                        <div class="progress-bar bg-success" style="width: 65%;"></div>
+                      </div>
+                      <span class="text-white">10 to 100</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-1">
+                      <small class="text-white-50">Low and</small>
+                      <small class="text-white-50">More progress</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <h3 class="fw-bold mb-3">Financial Summary</h3>
             <div class="row g-4 mb-4">
@@ -348,51 +353,61 @@
       </section>
     </div>
   </main>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 const supabaseClient = supabase.createClient(
   "https://zwziuzioivscsslccncl.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
 );
 
-supabaseClient.auth.getUser().then(({data})=>{
-  if(!data.user){
-    window.location.href = "login.html";
-  }
-});
-</script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-const ctx = document.getElementById('expensePieChart');
+async function loadUser() {
+  const { data: { user }, error } = await supabaseClient.auth.getUser();
 
-new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ['Groceries', 'Utilities', 'Rent', 'Leisure'],
-    datasets: [{
-      data: [430, 210, 650, 180],
-      backgroundColor: [
-        '#2dd4bf',
-        '#38bdf8',
-        '#f87171',
-        '#fbbf24'
-      ],
-      borderWidth: 0
-    }]
-  },
-  options: {
-    plugins: {
-      legend: {
-        position: 'bottom',
-        labels: {
-          boxWidth: 14,
-          padding: 15
-        }
-      }
-    }
+  if (!user) {
+    window.location.href = "login.html";
+    return;
   }
+
+  // ✅ Fetch user from your USERS table
+  const { data, error: dbError } = await supabaseClient
+    .from("users")
+    .select("*")
+    .eq("id", user.id)
+    .single();
+
+  if (dbError) {
+    console.log("User not in DB:", dbError.message);
+    return;
+  }
+
+  // ✅ UPDATE UI (IMPORTANT FIX)
+  document.querySelectorAll(".profile-heading").forEach(el => {
+    el.innerText = data.name || "User";
+  });
+
+  document.querySelectorAll(".text-muted").forEach(el => {
+    if (el.innerText.includes("@")) {
+      el.innerText = data.email;
+    }
+  });
+}
+
+loadUser();
+
+
+// ✅ LOGOUT FIX
+document.querySelectorAll('a[href="../index.html"]').forEach(btn => {
+  btn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    await supabaseClient.auth.signOut();
+    window.location.href = "../index.html";
+  });
 });
 </script>
+
+
+
 </body>
+</html>

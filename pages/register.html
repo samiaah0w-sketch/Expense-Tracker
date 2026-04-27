@@ -59,69 +59,64 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script>
+  
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
 const supabaseClient = supabase.createClient(
   "https://zwziuzioivscsslccncl.supabase.co",
-  "YOUR_ANON_KEY"
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
 );
 
-// ✅ Check if already selected
-$(document).ready(async function () {
+document.addEventListener("DOMContentLoaded", async () => {
 
+  // ✅ Always get user this way (reliable)
   const { data: { user } } = await supabaseClient.auth.getUser();
 
   if (!user) {
-    alert("Please login first");
     window.location.href = "login.html";
     return;
   }
 
-  // 🔍 Check if mood already exists
+  // ✅ Check if mode already exists
   const { data, error } = await supabaseClient
-    .from("users")
-    .select("mode")
-    .eq("id", user.id)
-    .single();
+  .from("users")
+  .select("mode")
+  .eq("id", user.id)
+  .single();
 
-  if (data && data.mode) {
-    // Already selected → redirect
+if (error) {
+  alert(error.message);
+  return;
+}
+
+if (data && data.mode) {
     window.location.href = "dashboard.html";
-  }
-
-});
-
-// ✅ Handle mood selection
-$(".selectMood").on("click", async function () {
-
-  const selectedMood = $(this).data("mood");
-
-  const { data: { user } } = await supabaseClient.auth.getUser();
-
-  if (!user) {
-    alert("User not found");
     return;
   }
 
-  // 💾 Save in database
-  const { error } = await supabaseClient
-    .from("users")
-    .update({ mode: selectedMood })
-    .eq("id", user.id);
+  // ✅ Button clicks
+  document.querySelectorAll(".selectMood").forEach(btn => {
+    btn.addEventListener("click", async () => {
 
-  if (error) {
-    alert(error.message);
-    return;
-  }
+      const mood = btn.dataset.mood;
 
-  // 💾 Save in localStorage (fast access)
-  localStorage.setItem("mode", selectedMood);
+      const { error } = await supabaseClient
+        .from("users")
+        .update({ mode: mood })
+        .eq("id", user.id);
 
-  alert("Mood selected successfully!");
+      if (error) {
+        alert(error.message);
+        return;
+      }
 
-  // 🚀 Redirect
-  window.location.href = "dashboard.html";
+      window.location.href = "dashboard.html";
+    });
+  });
+
 });
 </script>
+
+
 </body>
 </html>
