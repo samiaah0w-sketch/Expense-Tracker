@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reports - Expense Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="bg-light">
+  <!-- Mobile Sidebar (Offcanvas) -->
+  <div class="offcanvas offcanvas-start mobile-sidebar" tabindex="-1" id="mobileSidebar">
+    <div class="offcanvas-header">
+      <h5 class="fw-bold">Menu</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="user-info">
+      <div class="d-flex align-items-center gap-3">
+        <div class="user-avatar">👤</div>
+        <div>
+          <h6 class="mb-0 fw-bold">John Doe</h6>
+          <p class="mb-0 text-muted small">john@example.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="offcanvas-body">
+      <div class="nav-menu">
+        <div class="list-group list-group-flush">
+          <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
+          <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+          <a href="bills.html" class="list-group-item list-group-item-action">Manage Bills</a>
+          <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
+          <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
+          <a href="reports.html" class="list-group-item list-group-item-action active">Reports</a>
+          <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
+          <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
+          <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Header -->
+  <header class="py-2 d-lg-none fixed-top bg-white shadow-sm">
+    <div class="container d-flex align-items-center justify-content-between">
+      <button class="btn border-0 p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
+      </button>
+      <span class="fw-bold text-success">Expense Tracker</span>
+      <a href="profile.html" class="btn p-0">
+        <div style="width: 32px; height: 32px; display: grid; place-items: center; border-radius: 8px; background: rgba(45, 212, 191, 0.2); color: #0f766e;">👤</div>
+      </a>
+    </div>
+  </header>
+
+  <main class="py-5">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-3 d-none d-lg-block">
+          <div class="sidebar-panel p-4 shadow-sm">
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div class="profile-avatar">👤</div>
+              <div>
+                <h5 class="mb-1 profile-heading">John Doe</h5>
+                <p class="mb-0 text-muted">john@example.com</p>
+              </div>
+            </div>
+            <div class="sidebar-nav">
+              <div class="list-group list-group-flush">
+                <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
+                <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+                <a href="bills.html" class="list-group-item list-group-item-action">Manage Bills</a>
+                <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
+                <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
+                <a href="reports.html" class="list-group-item list-group-item-action active">Reports</a>
+                <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
+                <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
+                <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <!-- Student Mood Report -->
+          <div id="student-report" class="d-none">
+            <div class="d-flex flex-wrap gap-3 align-items-center justify-content-between mb-3">
+              <h2 class="fw-bold mb-0"><span class="me-2">🎓</span>Student Mode Reports</h2>
+              <div>
+                <button class="btn btn-success me-2">Download Report</button>
+                <button class="btn btn-info text-white">Share Report</button>
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-md-3">
+                <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
+                  <div class="text-muted small">Total Expense this month</div>
+                  <div class="fw-bold fs-3">$1850</div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
+                  <div class="text-muted small">Highest Spending Category</div>
+                  <div class="fw-bold fs-3">Food</div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
+                  <div class="text-muted small">Average Daily Spend</div>
+                  <div class="fw-bold fs-3">$60</div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
+                  <div class="text-muted small">Money Saved this month</div>
+                  <div class="fw-bold fs-3">$150</div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
+                  <div class="fw-bold mb-2"><span class="me-2">🎓</span>Where my money goes</div>
+                  <img src="../assets/student-pie.png" alt="Pie Chart" class="img-fluid mb-2" style="max-height:220px;object-fit:contain;">
+                  <div class="row small">
+                    <div class="col-6">Food: $4000</div>
+                    <div class="col-6">Books: $2500</div>
+                    <div class="col-6">Transport: $3000</div>
+                    <div class="col-6">Leisure: $3000</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
+                  <div class="fw-bold mb-2">Weekly vs Monthly Spending</div>
+                  <img src="../assets/student-bar.png" alt="Bar Chart" class="img-fluid mb-2" style="max-height:220px;object-fit:contain;">
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
+                  <div class="fw-bold mb-2">Savings Goal: Laptop</div>
+                  <div class="d-flex justify-content-between mb-1 small"><span>Target amount $1200</span><span>Saved amount $450</span></div>
+                  <div class="progress mb-1" style="height:18px;"><div class="progress-bar bg-success" style="width:37%">37%</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- General Mood Report -->
+          <div id="general-report" class="d-none">
+            <div class="d-flex flex-wrap gap-3 align-items-center justify-content-between mb-3">
+              <h2 class="fw-bold mb-0"><span class="me-2">🏠</span>GENERAL MOOD - Report</h2>
+              <div>
+                <button class="btn btn-success me-2">Download Full Report</button>
+                <button class="btn btn-info text-white">Share Insights</button>
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-md-3">
+                <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
+                  <div class="text-muted small">Total Expense This Month:</div>
+                  <div class="fw-bold fs-3">$2850.00</div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
+                  <div class="text-muted small">Highest Spending Category:</div>
+                  <div class="fw-bold fs-3">Housing</div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
+                  <div class="text-muted small">Average Daily Spnd:</div>
+                  <div class="fw-bold fs-3">$95.00</div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
+                  <div class="text-muted small">Bills/EMI Percentage:</div>
+                  <div class="fw-bold fs-3">55%</div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
+                  <div class="fw-bold mb-2">Section 1 — Expense by Category</div>
+                  <div class="mb-2">Where my money goes</div>
+                  <img src="../assets/general-pie.png" alt="Pie Chart" class="img-fluid mb-2" style="max-height:220px;object-fit:contain;">
+                  <div class="row small">
+                    <div class="col-6">Housing: $2850.00</div>
+                    <div class="col-6">Bills: $650.00</div>
+                    <div class="col-6">Food: $2850.00</div>
+                    <div class="col-6">Transport: $95.00</div>
+                    <div class="col-6">Other: $55.00</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
+                  <div class="fw-bold mb-2">Section 2 — Weekly vs Monthly Spending</div>
+                  <div class="mb-2">Am I overspending this week?</div>
+                  <img src="../assets/general-bar.png" alt="Bar Chart" class="img-fluid mb-2" style="max-height:220px;object-fit:contain;">
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
+                  <div class="fw-bold mb-2">Section 3 — General Extrmary</div>
+                  <div class="mb-2">How I spent the whie year</div>
+                  <img src="../assets/general-line.png" alt="Line Chart" class="img-fluid mb-2" style="max-height:220px;object-fit:contain;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled"><a class="page-link">&lt;</a></li>
+              <li class="page-item active"><a class="page-link">1</a></li>
+              <li class="page-item"><a class="page-link">2</a></li>
+              <li class="page-item disabled"><a class="page-link">...</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Mood detection logic
+    function getMood() {
+      // Try to get from URL first
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has('mood')) return urlParams.get('mood');
+      // Try to get from localStorage
+      if (localStorage.getItem('mood')) return localStorage.getItem('mood');
+      return 'general';
+    }
+    const mood = getMood();
+    if (mood === 'student') {
+      document.getElementById('student-report').classList.remove('d-none');
+      document.getElementById('general-report').classList.add('d-none');
+    } else {
+      document.getElementById('general-report').classList.remove('d-none');
+      document.getElementById('student-report').classList.add('d-none');
+    }
+    // Optionally store mood for navigation
+    localStorage.setItem('mood', mood);
+  </script>
+</body>
+</html>

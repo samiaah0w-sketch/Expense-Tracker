@@ -28,6 +28,7 @@
         <div class="list-group list-group-flush">
           <a href="dashboard.html" class="list-group-item list-group-item-action active">Dashboard</a>
           <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+          <a href="bills.html" class="list-group-item list-group-item-action">Manage Bills</a>
           <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
           <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
           <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
@@ -69,6 +70,7 @@
               <div class="list-group list-group-flush">
                 <a href="dashboard.html" class="list-group-item list-group-item-action active">Dashboard</a>
                 <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+                <a href="bills.html" class="list-group-item list-group-item-action">Manage Bills</a>
                 <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
                 <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
                 <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
@@ -83,32 +85,27 @@
         <div class="col-lg-9">
           <!-- Student Mood Dashboard -->
           <div id="student-dashboard" style="display:none;">
-            <h2 class="fw-bold mb-4 mt-2">Mood & Wellness Overview</h2>
+            <h2 class="fw-bold mb-4 mt-2">Dashboard</h2>
             <div class="row g-4 mb-4">
-              <div class="col-12">
-                <div class="card shadow-sm p-4 d-flex flex-md-row align-items-center justify-content-between" style="background: linear-gradient(120deg, #6dd5ed 0%, #2193b0 100%, #fff 100%); border-radius: 1.5rem;">
-                  <div>
-                    <div class="text-white-50 mb-1">Current Mood</div>
-                    <div class="d-flex align-items-center">
-                      <span class="fs-2 fw-bold text-white">Groodnt</span>
-                      <span class="ms-2 fs-2">&#128578;</span>
-                    </div>
-                  </div>
-                  <div class="flex-grow-1 ms-md-5">
-                    <div class="mb-2 fw-semibold text-white">Weekly Wellness Goal</div>
-                    <div class="d-flex align-items-center">
-                      <div class="progress flex-grow-1 me-3" style="height: 12px; background: #e0f7fa;">
-                        <div class="progress-bar bg-success" style="width: 65%;"></div>
-                      </div>
-                      <span class="text-white">10 to 100</span>
-                    </div>
-                    <div class="d-flex justify-content-between mt-1">
-                      <small class="text-white-50">Low and</small>
-                      <small class="text-white-50">More progress</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <div class="col-12">
+  <div class="card shadow-sm p-4 dashboard-goal-card">
+    
+    <h4 class="text-white fw-bold text-center mb-4">
+      Weekly Wellness Goal
+    </h4>
+
+    <div class="progress dashboard-progress mx-auto">
+      <div class="progress-bar bg-success" style="width:65%"></div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-2 text-white small">
+      <span>0%</span>
+      <span>65%</span>
+      <span>100%</span>
+    </div>
+
+  </div>
+</div>
             </div>
             <h3 class="fw-bold mb-3">Financial Summary</h3>
             <div class="row g-4 mb-4">
@@ -279,7 +276,9 @@
               </div>
               <span class="badge bg-success bg-opacity-10 text-success">Updated</span>
             </div>
-            <div class="dashboard-chart-placeholder"></div>
+           <div class="pie-wrapper">
+  <canvas id="expensePieChart"></canvas>
+</div>
             <div class="row g-3 mt-4 text-center">
               <div class="col-6">
                 <div class="p-3 rounded-4" style="background: rgba(45, 212, 191, 0.08);">
@@ -364,5 +363,36 @@ supabaseClient.auth.getUser().then(({data})=>{
   }
 });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('expensePieChart');
+
+new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: ['Groceries', 'Utilities', 'Rent', 'Leisure'],
+    datasets: [{
+      data: [430, 210, 650, 180],
+      backgroundColor: [
+        '#2dd4bf',
+        '#38bdf8',
+        '#f87171',
+        '#fbbf24'
+      ],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          boxWidth: 14,
+          padding: 15
+        }
+      }
+    }
+  }
+});
+</script>
 </body>
-</html>

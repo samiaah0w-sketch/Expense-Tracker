@@ -521,3 +521,120 @@ textarea.form-control {
   background-color: rgba(13, 110, 253, 0.15); /* blue */
   color: #0d6efd;
 }
+.dashboard-goal-card{
+    background: linear-gradient(120deg,#6dd5ed 0%, #2193b0 100%);
+    border-radius: 24px;
+    border: none;
+}
+
+.dashboard-progress{
+    height: 14px;
+    max-width: 700px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.3);
+}
+
+.dashboard-progress .progress-bar{
+    border-radius: 30px;
+}
+/* Fix header overlap */
+main {
+  padding-top: 70px;
+}
+
+/* Table improvements */
+.table td, 
+.table th {
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Better spacing for mobile */
+@media (max-width: 768px) {
+
+  /* Reduce container side padding */
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* Card padding fix */
+  .card {
+    border-radius: 12px;
+  }
+
+  .card-header {
+    padding: 12px 16px;
+  }
+
+  .card-body {
+    padding: 0;
+  }
+
+  /* Table spacing */
+  .table th,
+  .table td {
+    padding: 12px 10px;
+    font-size: 14px;
+  }
+
+  /* Fix first & last column padding */
+  .table th:first-child,
+  .table td:first-child {
+    padding-left: 16px;
+  }
+
+  .table th:last-child,
+  .table td:last-child {
+    padding-right: 16px;
+  }
+
+
+}
+/* STATUS BADGE - uniform width */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;              /* fixed width for all */
+  height: 32px;              /* consistent height */
+  font-size: 12px;
+  border-radius: 20px;
+  white-space: nowrap;       /* prevent text wrap */
+  padding: 0;                /* remove uneven padding */
+}
+
+/* ACTION BUTTON - same width as badge */
+.btn-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;              /* match badge width */
+  height: 32px;
+  font-size: 12px;
+  padding: 0;
+  white-space: nowrap;
+}
+
+/* Optional: align column content center */
+td:nth-child(5), /* Status column */
+td:nth-child(6)  /* Action column */ {
+  text-align: center;
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
+  .badge,
+  .btn-sm {
+    width: 90px;   /* slightly smaller for mobile */
+    height: 30px;
+    font-size: 11px;
+  }
+}
+
+/* Smooth table container */
+.table-responsive {
+  border-radius: 12px;
+  overflow-x: auto;
+}
+ 
