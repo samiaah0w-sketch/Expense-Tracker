@@ -53,73 +53,221 @@
   </header>
 
   <main class="dashboard-page">
-    <div class="container">
-      <section class="dashboard-header text-center">
-        <h1 class="display-5 fw-bold">My Dashboard</h1>
-      </section>
-
-      <section class="row g-4 mb-4">
-        <div class="col-md-6 col-xl-3">
-          <div class="metric-card p-4 shadow-sm h-100">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+    <div class="container-fluid">
+      <div class="row gy-4">
+        <!-- Sidebar (Desktop) -->
+        <div class="col-lg-3 d-none d-lg-block">
+          <div class="sidebar-panel p-4 shadow-sm">
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div class="profile-avatar">👤</div>
               <div>
-                <h6 class="text-muted mb-2">Total Expense</h6>
-                <div class="metric-value">$1,245.67</div>
-              </div>
-              <div class="dashboard-badge">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
-                <span>Last 30 Days</span>
+                <h5 class="mb-1 profile-heading">John Doe</h5>
+                <p class="mb-0 text-muted">john@example.com</p>
               </div>
             </div>
-            <p class="metric-note">Track spending over the past month.</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-          <div class="metric-card p-4 shadow-sm h-100">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-              <div>
-                <h6 class="text-muted mb-2">Budget Left</h6>
-                <div class="metric-value">$754.33</div>
-              </div>
-              <div class="dashboard-badge">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.66 0-3 1.34-3 3 0 2.25 2.76 4.45 3 4.68.24-.23 3-2.43 3-4.68 0-1.66-1.34-3-3-3z"/></svg>
-                <span>This Month</span>
+            <div class="sidebar-nav">
+              <div class="list-group list-group-flush">
+                <a href="dashboard.html" class="list-group-item list-group-item-action active">Dashboard</a>
+                <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+                <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
+                <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
+                <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
+                <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
+                <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
+                <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
               </div>
             </div>
-            <p class="metric-note">Remaining balance for your budget.</p>
           </div>
         </div>
-        <div class="col-md-6 col-xl-3">
-          <div class="metric-card p-4 shadow-sm h-100">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-              <div>
-                <h6 class="text-muted mb-2">Savings Goal</h6>
-                <div class="metric-value">$420.00</div>
-              </div>
-              <div class="dashboard-badge">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-3 0-6 2-6 5v2h12v-2c0-3-3-5-6-5z"/></svg>
-                <span>Goal progress</span>
+        <!-- Main Dashboard Content -->
+        <div class="col-lg-9">
+          <!-- Student Mood Dashboard -->
+          <div id="student-dashboard" style="display:none;">
+            <h2 class="fw-bold mb-4 mt-2">Mood & Wellness Overview</h2>
+            <div class="row g-4 mb-4">
+              <div class="col-12">
+                <div class="card shadow-sm p-4 d-flex flex-md-row align-items-center justify-content-between" style="background: linear-gradient(120deg, #6dd5ed 0%, #2193b0 100%, #fff 100%); border-radius: 1.5rem;">
+                  <div>
+                    <div class="text-white-50 mb-1">Current Mood</div>
+                    <div class="d-flex align-items-center">
+                      <span class="fs-2 fw-bold text-white">Groodnt</span>
+                      <span class="ms-2 fs-2">&#128578;</span>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-md-5">
+                    <div class="mb-2 fw-semibold text-white">Weekly Wellness Goal</div>
+                    <div class="d-flex align-items-center">
+                      <div class="progress flex-grow-1 me-3" style="height: 12px; background: #e0f7fa;">
+                        <div class="progress-bar bg-success" style="width: 65%;"></div>
+                      </div>
+                      <span class="text-white">10 to 100</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-1">
+                      <small class="text-white-50">Low and</small>
+                      <small class="text-white-50">More progress</small>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <p class="metric-note">Funds reserved for saving targets.</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-          <div class="metric-card p-4 shadow-sm h-100">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-              <div>
-                <h6 class="text-muted mb-2">Transactions</h6>
-                <div class="metric-value">18</div>
+            <h3 class="fw-bold mb-3">Financial Summary</h3>
+            <div class="row g-4 mb-4">
+              <div class="col-md-6 col-xl-3">
+                <div class="card shadow-sm p-4 h-100">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="fw-semibold">Allowance</span>
+                    <span class="text-muted small">Easy</span>
+                    <div class="form-check form-switch ms-2">
+                      <input class="form-check-input" type="checkbox" checked>
+                    </div>
+                  </div>
+                  <div class="mb-2 text-muted">This Week / Month</div>
+                  <div>Current</div>
+                  <div class="fs-4 fw-bold">$1,200.00</div>
+                  <div class="text-muted">Month</div>
+                  <div class="fw-semibold">$1,200.00</div>
+                </div>
               </div>
-              <div class="dashboard-badge">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18"/></svg>
-                <span>Last 30 Days</span>
+              <div class="col-md-6 col-xl-3">
+                <div class="card shadow-sm p-4 h-100">
+                  <div class="fw-semibold mb-2">Income</div>
+                  <div class="text-muted mb-1">Scholarship / Part-time income</div>
+                  <div>Data</div>
+                  <div class="fs-4 fw-bold">$257.41</div>
+                  <div class="text-muted">Part-income</div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xl-3">
+                <div class="card shadow-sm p-4 h-100">
+                  <div class="fw-semibold mb-2">This Week Expense</div>
+                  <div class="text-muted mb-1">Recent spending</div>
+                  <div>Spending <span class="text-danger">-$30.00</span></div>
+                  <div>Recent Spending <span class="text-danger">-$8.00</span></div>
+                  <div>Total Week <span class="text-danger">-$5.39</span></div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xl-3">
+                <div class="card shadow-sm p-4 h-100">
+                  <div class="fw-semibold mb-2">Savings Progress</div>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Goals</span>
+                    <span>$32,600</span>
+                  </div>
+                  <div class="progress mb-2" style="height: 10px;">
+                    <div class="progress-bar bg-success" style="width: 70%"></div>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <span>Current</span>
+                    <span>$9,cd6bf</span>
+                  </div>
+                </div>
               </div>
             </div>
-            <p class="metric-note">Total number of expense entries.</p>
+            <div class="row g-4 mb-4">
+              <div class="col-md-6 col-xl-4">
+                <div class="card shadow-sm p-4 h-100 border-danger-subtle border-2">
+                  <div class="fw-semibold text-danger mb-2">Tuition reminder</div>
+                  <div class="text-muted">Important date: <span class="text-danger fw-semibold">Octobr 21</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- General Mood Dashboard -->
+          <div id="general-dashboard" style="display:none;">
+            <h2 class="fw-bold mb-4 mt-2">Mood & Wellness Overview</h2>
+            <div class="row g-4 mb-4">
+              <div class="col-12">
+                <div class="card shadow-sm p-4 d-flex flex-md-row align-items-center justify-content-between" style="background: linear-gradient(120deg, #6dd5ed 0%, #2193b0 100%, #fff 100%); border-radius: 1.5rem;">
+                  <div>
+                    <div class="text-white-50 mb-1">Current Mood</div>
+                    <div class="d-flex align-items-center">
+                      <span class="fs-2 fw-bold text-white">Groodnt</span>
+                      <span class="ms-2 fs-2">&#128578;</span>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-md-5">
+                    <div class="mb-2 fw-semibold text-white">Weekly Wellness Goal</div>
+                    <div class="d-flex align-items-center">
+                      <div class="progress flex-grow-1 me-3" style="height: 12px; background: #e0f7fa;">
+                        <div class="progress-bar bg-success" style="width: 65%;"></div>
+                      </div>
+                      <span class="text-white">10 to 100</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-1">
+                      <small class="text-white-50">Low and</small>
+                      <small class="text-white-50">More progress</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h3 class="fw-bold mb-3">General Mood Dashboard</h3>
+            <div class="row g-4 mb-4">
+              <div class="col-md-6 col-xl-3">
+                <div class="card shadow-sm p-4 h-100">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="fw-semibold">Monthly Salary</span>
+                    <div class="form-check form-switch ms-2">
+                      <input class="form-check-input" type="checkbox" checked>
+                    </div>
+                  </div>
+                  <div class="mb-2 text-muted">This Week / Month</div>
+                  <div>Salary This Month</div>
+                  <div class="fs-4 fw-bold">$4,500.00</div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xl-3">
+                <div class="card shadow-sm p-4 h-100">
+                  <div class="fw-semibold mb-2">This Month Expense</div>
+                  <div class="text-muted mb-1">Current Month's Total Expenses</div>
+                  <div>Current Month's Total Expenses</div>
+                  <div class="fs-4 fw-bold">$1,850.00</div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xl-3">
+                <div class="card shadow-sm p-4 h-100">
+                  <div class="fw-semibold mb-2">Savings This Month</div>
+                  <div class="text-muted mb-1">Replacrspending</div>
+                  <div>Current Savings</div>
+                  <div class="fs-4 fw-bold">$2,650.00</div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xl-3">
+                <div class="card shadow-sm p-4 h-100">
+                  <div class="fw-semibold mb-2">Expense by Category Chart</div>
+                  <div class="d-flex flex-column align-items-center">
+                    <img src="https://dummyimage.com/120x120/6dd5ed/fff&text=Chart" alt="Chart" class="mb-2" style="border-radius: 50%;">
+                    <div class="text-muted small">Groceries, Rent, Utilities, Leisure</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-4 mb-4">
+              <div class="col-md-6 col-xl-4">
+                <div class="card shadow-sm p-4 h-100 border-danger-subtle border-2">
+                  <div class="fw-semibold text-danger mb-2">EMI / Bills reminder</div>
+                  <div class="text-muted">Important date: <span class="text-danger fw-semibold">October 21</span></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </main>
+  <script>
+    // Show dashboard based on ?mood=student or ?mood=general
+    function getMood() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('mood') || 'student';
+    }
+    function showDashboard() {
+      const mood = getMood();
+      document.getElementById('student-dashboard').style.display = (mood === 'student') ? '' : 'none';
+      document.getElementById('general-dashboard').style.display = (mood === 'general') ? '' : 'none';
+    }
+    showDashboard();
+  </script>
 
       <section class="row g-4">
         <div class="col-xl-6">
@@ -203,5 +351,18 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const supabaseClient = supabase.createClient(
+  "https://zwziuzioivscsslccncl.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
+);
+
+supabaseClient.auth.getUser().then(({data})=>{
+  if(!data.user){
+    window.location.href = "login.html";
+  }
+});
+</script>
 </body>
 </html>

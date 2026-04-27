@@ -87,23 +87,24 @@
         <div class="col-md-8 col-lg-5">
           <div class="signup-card p-5 shadow-sm">
             <h1 class="h2 fw-bold text-center mb-4">Create Account <span>🚀</span></h1>
-            <form>
+            <form id="signupForm">
               <div class="mb-3">
                 <label for="fullName" class="form-label">Full Name</label>
-                <input type="text" class="form-control form-control-lg" id="fullName" placeholder="Full Name" />
+               <input type="text" class="form-control form-control-lg" id="fullName" />
               </div>
               <div class="mb-3">
                 <label for="signupEmail" class="form-label">Email</label>
-                <input type="email" class="form-control form-control-lg" id="signupEmail" placeholder="Email" />
-              </div>
+                <input type="email" class="form-control form-control-lg" id="signupEmail" />
+</div>
               <div class="mb-3 position-relative">
                 <label for="signupPassword" class="form-label">Password</label>
-                <input type="password" class="form-control form-control-lg" id="signupPassword" placeholder="Password" />
+               <input type="password" class="form-control form-control-lg" id="signupPassword" />
               </div>
               <div class="mb-4">
                 <label for="confirmPassword" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control form-control-lg" id="confirmPassword" placeholder="Confirm Password" />
+                <input type="password" class="form-control form-control-lg" id="confirmPassword" />
               </div>
+              <div id="msgBox" class="alert d-none mt-3"></div>
               <button type="submit" class="btn btn-success signup-button">Create Account</button>
             </form>
             <p class="text-center auth-note mt-4 mb-0">Already have account? <a href="../login.html">Login</a></p>
@@ -146,5 +147,67 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const supabaseClient = supabase.createClient(
+  "https://zwziuzioivscsslccncl.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
+);
+function showMessage(text, type){
+  const msg = document.getElementById("msgBox");
+  msg.className = "alert alert-" + type + " mt-3";
+  msg.innerText = text;
+  msg.classList.remove("d-none");
+}
+</script>
+<script>
+document.getElementById("signupForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const name = fullName.value;
+  const email = signupEmail.value;
+  const password = signupPassword.value;
+  const confirm = confirmPassword.value;
+
+  if (password !== confirm) {
+    showMessage("Passwords do not match", "danger");
+    return;
+  }
+
+  // 1️⃣ Sign up user
+  const { error: signError } = await supabaseClient.auth.signUp({
+    email,
+    password
+  });
+
+  if (signError) {
+    showMessage(signError.message, "danger");
+    return;
+  }
+
+  // 2️⃣ Get logged user from session
+  const { data: { user } } = await supabaseClient.auth.getUser();
+
+  // 3️⃣ Insert into users table
+  const { error: dbError } = await supabaseClient.from("users").insert({
+    id: user.id,
+    name: name,
+    email: email
+  });
+
+  if (dbError) {
+    showMessage(dbError.message, "danger");
+    return;
+  }
+
+  showMessage("Signup successful! Redirecting...", "success");
+
+  setTimeout(() => {
+window.location.href = "register.html"; // mode selection page
+  }, 2000);
+});
+</script>
 </body>
 </html>
