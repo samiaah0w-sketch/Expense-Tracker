@@ -8,278 +8,257 @@
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body class="bg-light">
-  <!-- Mobile Sidebar (Offcanvas) -->
   <div class="offcanvas offcanvas-start mobile-sidebar" tabindex="-1" id="mobileSidebar">
-    <div class="offcanvas-header">
-      <h5 class="fw-bold">Menu</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div class="user-info">
-      <div class="d-flex align-items-center gap-3">
-        <div class="user-avatar">👤</div>
-        <div>
-          <h6 class="mb-0 fw-bold">John Doe</h6>
-          <p class="mb-0 text-muted small">john@example.com</p>
-        </div>
-      </div>
-    </div>
-    <div class="offcanvas-body">
-      <div class="nav-menu">
-        <div class="list-group list-group-flush">
-          <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
-          <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
-          <a href="bills.html" class="list-group-item list-group-item-action">Manage Bills</a>
-          
-          <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
-          <a href="budget.html" class="list-group-item list-group-item-action active">Budgets</a>
-          <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
-          <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
-          <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
-          <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
-        </div>
-      </div>
-    </div>
+    <div class="offcanvas-header"><h5 class="fw-bold">Menu</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button></div>
+    <div class="user-info"><div class="d-flex align-items-center gap-3"><div class="user-avatar">👤</div><div><h6 class="mb-0 fw-bold profile-heading"></h6><p class="mb-0 text-muted small user-email"></p></div></div></div>
+    <div class="offcanvas-body"><div class="nav-menu"><div class="list-group list-group-flush">
+      <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
+      <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+      <a href="bills.html" class="list-group-item list-group-item-action">Manage Bills</a>
+      <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
+      <a href="budget.html" class="list-group-item list-group-item-action active">Budgets</a>
+      <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
+      <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
+      <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
+      <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
+    </div></div></div>
   </div>
-
-  <!-- Mobile Header -->
+ 
   <header class="py-2 d-lg-none fixed-top bg-white shadow-sm">
     <div class="container d-flex align-items-center justify-content-between">
       <button class="btn border-0 p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
       </button>
       <span class="fw-bold text-success">Expense Tracker</span>
-      <a href="profile.html" class="btn p-0">
-        <div style="width: 32px; height: 32px; display: grid; place-items: center; border-radius: 8px; background: rgba(45, 212, 191, 0.2); color: #0f766e;">👤</div>
-      </a>
+      <a href="profile.html" class="btn p-0"><div style="width:32px;height:32px;display:grid;place-items:center;border-radius:8px;background:rgba(45,212,191,0.2);color:#0f766e;">👤</div></a>
     </div>
   </header>
-
+ 
   <main class="py-4 py-lg-5">
     <div class="container-fluid px-3 px-lg-4">
       <div class="row g-3 g-lg-4">
-        <!-- Desktop Sidebar -->
         <div class="col-lg-3 d-none d-lg-block">
           <div class="sidebar-panel p-4 shadow-sm rounded-4">
             <div class="d-flex align-items-center gap-3 mb-4">
               <div class="profile-avatar">👤</div>
-              <div>
-                <h5 class="mb-1 profile-heading">John Doe</h5>
-                <p class="mb-0 text-muted">john@example.com</p>
-              </div>
+              <div><h5 class="mb-1 profile-heading"></h5><p class="mb-0 text-muted user-email"></p></div>
             </div>
-            <div class="sidebar-nav">
-              <div class="list-group list-group-flush">
-                <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
-                <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
-                <a href="bills.html" class="list-group-item list-group-item-action">Manage Bills</a>
-                <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
-                <a href="budget.html" class="list-group-item list-group-item-action active">Budgets</a>
-                <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
-                <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
-                <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
-                <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
-              </div>
-            </div>
+            <div class="sidebar-nav"><div class="list-group list-group-flush">
+              <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
+              <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+              <a href="bills.html" class="list-group-item list-group-item-action">Manage Bills</a>
+              <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
+              <a href="budget.html" class="list-group-item list-group-item-action active">Budgets</a>
+              <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
+              <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
+              <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
+              <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
+            </div></div>
           </div>
         </div>
-        <!-- Main Content -->
+ 
         <div class="col-lg-9">
-          <!-- Income Setup Card -->
+          <div id="globalMsg" class="alert d-none mb-3"></div>
+ 
+          <!-- Income Setup -->
           <div class="row g-3 g-lg-4 mb-4">
             <div class="col-12">
               <div class="p-3 p-lg-4 shadow-sm rounded-4 bg-white">
-                <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-3">
-                  <h4 class="fw-bold mb-0">Income Setup <span class="badge bg-warning text-dark fs-6 fw-normal">Important</span></h4>
-                </div>
-                <form class="row g-2 g-lg-3 align-items-end">
+                <h4 class="fw-bold mb-3">Income Setup <span class="badge bg-warning text-dark fs-6 fw-normal">Important</span></h4>
+                <div class="row g-2 g-lg-3 align-items-end">
                   <div class="col-12 col-sm-6 col-lg-3">
-                    <label class="form-label small fw-medium">Custom Income Category</label>
-                    <select class="form-select form-select-sm">
-                      <option>Freelance</option>
-                      <option selected>Main Job</option>
-                    </select>
+                    <label class="form-label small fw-medium">Category</label>
+                    <input type="text" id="incomeCategory" class="form-control form-control-sm" placeholder="e.g. Main Job" />
                   </div>
                   <div class="col-6 col-sm-3 col-lg-2">
                     <label class="form-label small fw-medium">Timeframe</label>
-                    <select class="form-select form-select-sm">
-                      <option>Daily</option>
-                      <option>Weekly</option>
-                      <option selected>Monthly</option>
+                    <select id="incomeTimeframe" class="form-select form-select-sm">
+                      <option>Daily</option><option>Weekly</option><option selected>Monthly</option>
                     </select>
                   </div>
                   <div class="col-6 col-sm-3 col-lg-2">
-                    <label class="form-label small fw-medium">Income Amount</label>
-                    <input type="number" class="form-control form-select-sm" placeholder="0.00" />
-                  </div>
-                  <div class="col-12 col-sm-6 col-lg-3">
-                    <label class="form-label small fw-medium">Monthly Total (Auto-calculated)</label>
-                    <div class="fw-bold fs-4 text-success">$5,000</div>
+                    <label class="form-label small fw-medium">Amount</label>
+                    <input type="number" id="incomeAmount" class="form-control form-select-sm" placeholder="0.00" />
                   </div>
                   <div class="col-12 col-lg-2">
-                    <div class="d-flex flex-column flex-sm-row gap-2">
-                      <button type="button" class="btn btn-success btn-sm flex-fill">Save Income</button>
-                      <button type="button" class="btn btn-info btn-sm flex-fill text-white">Add Source</button>
-                    </div>
+                    <button type="button" id="saveIncomeBtn" class="btn btn-success btn-sm w-100">Save Income</button>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>
-          <!-- Budget Plan & Income Sources Row -->
+ 
+          <!-- Budget Plan & Income Sources -->
           <div class="row g-3 g-lg-4 mb-4">
             <div class="col-12 col-md-5">
               <div class="p-3 p-lg-4 shadow-sm rounded-4 bg-white h-100">
                 <h5 class="fw-bold mb-3">Create Custom Budget Plan</h5>
-                <div class="d-flex align-items-center py-2 border-bottom">
-                  <span class="d-flex align-items-center justify-content-center rounded-3 me-3" style="background:rgba(45,212,191,0.15);width:40px;height:40px;font-size:1.25rem;">🍴</span>
-                  <span class="fw-semibold flex-fill">Food</span>
-                  <span class="badge bg-success-subtle text-success fw-semibold px-2 py-1">$4,000</span>
-                  <button class="btn btn-outline-info btn-sm ms-2" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647.646-.647a.5.5 0 0 1 .708 0z"/><path d="M13.646 3.354l-10 10a.5.5 0 0 0-.168.354v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .354-.146l10-10-2.646-2.646zm-10.354 10.5V14h.146l10-10-.146-.146-10 10z"/></svg></button>
-                  <button class="btn btn-outline-danger btn-sm ms-1" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5H6a.5.5 0 0 1-.5-.5v-7zM4.118 4 4 4.059V4.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-.441l-.118-.059A1.5 1.5 0 0 0 13 2.5V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v.5c0 .356.186.672.474.854zM2.5 4.5V2A2.5 2.5 0 0 1 5 0h6a2.5 2.5 0 0 1 2.5 2v2.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5z"/></svg></button>
+                <div class="row g-2 mb-3">
+                  <div class="col-7"><input type="text" id="budgetCategory" class="form-control form-control-sm" placeholder="Category name" /></div>
+                  <div class="col-3"><input type="number" id="budgetAmount" class="form-control form-control-sm" placeholder="Amount" /></div>
+                  <div class="col-2"><button id="addBudgetBtn" class="btn btn-success btn-sm w-100">+</button></div>
                 </div>
-                <div class="d-flex align-items-center py-2 border-bottom">
-                  <span class="d-flex align-items-center justify-content-center rounded-3 me-3" style="background:rgba(45,212,191,0.15);width:40px;height:40px;font-size:1.25rem;">✈️</span>
-                  <span class="fw-semibold flex-fill">Travel</span>
-                  <span class="badge bg-success-subtle text-success fw-semibold px-2 py-1">$2,500</span>
-                  <button class="btn btn-outline-info btn-sm ms-2" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647.646-.647a.5.5 0 0 1 .708 0z"/><path d="M13.646 3.354l-10 10a.5.5 0 0 0-.168.354v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .354-.146l10-10-2.646-2.646zm-10.354 10.5V14h.146l10-10-.146-.146-10 10z"/></svg></button>
-                  <button class="btn btn-outline-danger btn-sm ms-1" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5H6a.5.5 0 0 1-.5-.5v-7zM4.118 4 4 4.059V4.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-.441l-.118-.059A1.5 1.5 0 0 0 13 2.5V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v.5c0 .356.186.672.474.854zM2.5 4.5V2A2.5 2.5 0 0 1 5 0h6a2.5 2.5 0 0 1 2.5 2v2.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5z"/></svg></button>
+                <div id="budgetList">
+                  <div class="text-muted text-center py-3">Loading...</div>
                 </div>
-                <div class="d-flex align-items-center py-2">
-                  <span class="d-flex align-items-center justify-content-center rounded-3 me-3" style="background:rgba(45,212,191,0.15);width:40px;height:40px;font-size:1.25rem;">🎓</span>
-                  <span class="fw-semibold flex-fill">Study</span>
-                  <span class="badge bg-success-subtle text-success fw-semibold px-2 py-1">$3,000</span>
-                  <button class="btn btn-outline-info btn-sm ms-2" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647.646-.647a.5.5 0 0 1 .708 0z"/><path d="M13.646 3.354l-10 10a.5.5 0 0 0-.168.354v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .354-.146l10-10-2.646-2.646zm-10.354 10.5V14h.146l10-10-.146-.146-10 10z"/></svg></button>
-                  <button class="btn btn-outline-danger btn-sm ms-1" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5H6a.5.5 0 0 1-.5-.5v-7zM4.118 4 4 4.059V4.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-.441l-.118-.059A1.5 1.5 0 0 0 13 2.5V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v.5c0 .356.186.672.474.854zM2.5 4.5V2A2.5 2.5 0 0 1 5 0h6a2.5 2.5 0 0 1 2.5 2v2.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5z"/></svg></button>
-                </div>
-                <button class="btn btn-success w-100 mt-3 btn-sm">+ Add New Category</button>
               </div>
             </div>
+ 
             <div class="col-12 col-md-7">
               <div class="p-3 p-lg-4 shadow-sm rounded-4 bg-white h-100">
                 <h5 class="fw-bold mb-3">Saved Income Sources</h5>
                 <div class="table-responsive">
                   <table class="table table-hover align-middle mb-0">
                     <thead class="table-light">
-                      <tr>
-                        <th class="small fw-semibold">Category</th>
-                        <th class="small fw-semibold">Amount</th>
-                        <th class="small fw-semibold">Timeframe</th>
-                        <th class="small fw-semibold text-center">Actions</th>
-                      </tr>
+                      <tr><th class="small fw-semibold">Category</th><th class="small fw-semibold">Amount</th><th class="small fw-semibold">Timeframe</th><th class="small fw-semibold text-center">Actions</th></tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td><span class="d-inline-flex align-items-center justify-content-center rounded-3 me-2" style="background:rgba(45,212,191,0.15);width:32px;height:32px;font-size:1rem;">💰</span>Main Job</td>
-                        <td class="fw-semibold">$3,500</td>
-                        <td><span class="badge bg-primary-subtle text-primary">Monthly</span></td>
-                        <td>
-                          <div class="d-flex justify-content-center gap-1">
-                            <button class="btn btn-outline-info btn-sm" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647.646-.647a.5.5 0 0 1 .708 0z"/><path d="M13.646 3.354l-10 10a.5.5 0 0 0-.168.354v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .354-.146l10-10-2.646-2.646zm-10.354 10.5V14h.146l10-10-.146-.146-10 10z"/></svg></button>
-                            <button class="btn btn-outline-danger btn-sm" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5H6a.5.5 0 0 1-.5-.5v-7zM4.118 4 4 4.059V4.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-.441l-.118-.059A1.5 1.5 0 0 0 13 2.5V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v.5c0 .356.186.672.474.854zM2.5 4.5V2A2.5 2.5 0 0 1 5 0h6a2.5 2.5 0 0 1 2.5 2v2.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5z"/></svg></button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span class="d-inline-flex align-items-center justify-content-center rounded-3 me-2" style="background:rgba(45,212,191,0.15);width:32px;height:32px;font-size:1rem;">💰</span>Freelance</td>
-                        <td class="fw-semibold">$1,500</td>
-                        <td><span class="badge bg-info-subtle text-info">Weekly</span></td>
-                        <td>
-                          <div class="d-flex justify-content-center gap-1">
-                            <button class="btn btn-outline-info btn-sm" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647.646-.647a.5.5 0 0 1 .708 0z"/><path d="M13.646 3.354l-10 10a.5.5 0 0 0-.168.354v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .354-.146l10-10-2.646-2.646zm-10.354 10.5V14h.146l10-10-.146-.146-10 10z"/></svg></button>
-                            <button class="btn btn-outline-danger btn-sm" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5H6a.5.5 0 0 1-.5-.5v-7zM4.118 4 4 4.059V4.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-.441l-.118-.059A1.5 1.5 0 0 0 13 2.5V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v.5c0 .356.186.672.474.854zM2.5 4.5V2A2.5 2.5 0 0 1 5 0h6a2.5 2.5 0 0 1 2.5 2v2.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5z"/></svg></button>
-                          </div>
-                        </td>
-                      </tr>
+                    <tbody id="incomeTableBody">
+                      <tr><td colspan="4" class="text-center text-muted">Loading...</td></tr>
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
           </div>
-          <!-- Suggestions & Warnings Row -->
+ 
+          <!-- Budget Warning -->
           <div class="row g-3 g-lg-4 mb-4">
-            <div class="col-12 col-md-5">
-              <div class="p-3 p-lg-4 shadow-sm rounded-4 bg-white h-100">
-                <h5 class="fw-bold mb-3">Smart Suggestions <span class="small text-muted">(mode based)</span></h5>
-                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                  <div>
-                    <span class="fw-semibold">Student</span>
-                    <span class="badge bg-success ms-2">active</span>
-                  </div>
-                  <span class="small text-muted">Food vs Study</span>
-                </div>
-                <div class="py-2 border-bottom">
-                  <small class="text-danger">⚠️ You are spending too much on Food compared to Study.</small>
-                </div>
-                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                  <div>
-                    <span class="fw-semibold">General</span>
-                    <span class="badge bg-secondary ms-2">inactive</span>
-                  </div>
-                  <span class="small text-muted">EMI & Bills</span>
-                </div>
-                <div class="py-2">
-                  <small class="text-warning">💡 EMI & Bills taking 60% of income. Consider reducing.</small>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-md-7">
-              <div class="p-3 p-lg-4 shadow-sm rounded-4 bg-white h-100">
-                <h5 class="fw-bold mb-3">Budget Warning System</h5>
-                <div class="alert alert-danger d-flex align-items-center" role="alert">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
-                  <div>
-                    <strong>Warning:</strong> Food expense ($3,500) is close to budget limit ($4,000). Travel is over budget.
-                  </div>
-                </div>
-                <div class="mt-3">
-                  <div class="d-flex justify-content-between mb-1">
-                    <span class="small fw-medium">Food Budget</span>
-                    <span class="small text-success">87% used</span>
-                  </div>
-                  <div class="progress mb-2" style="height: 8px;">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 87%;" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <div class="d-flex justify-content-between mb-1">
-                    <span class="small fw-medium">Travel Budget</span>
-                    <span class="small text-danger">120% used</span>
-                  </div>
-                  <div class="progress" style="height: 8px;">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="120" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div class="mt-2 text-end">
-                  <a href="dashboard.html" class="small text-decoration-none">See Dashboard for realtime status →</a>
-                </div>
+            <div class="col-12">
+              <div class="p-3 p-lg-4 shadow-sm rounded-4 bg-white">
+                <h5 class="fw-bold mb-3">Budget Progress</h5>
+                <div id="budgetProgress"><div class="text-muted">Loading budget vs spending...</div></div>
               </div>
             </div>
           </div>
-          <!-- Pagination -->
-          <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center pagination-sm">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">‹</a>
-              </li>
-              <li class="page-item active" aria-current="page">
-                <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">2</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">3</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">›</a>
-              </li>
-            </ul>
-          </nav>
         </div>
       </div>
     </div>
   </main>
-
+ 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const sb = supabase.createClient(
+      "https://zwziuzioivscsslccncl.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
+    );
+    let currentUser = null;
+ 
+    function showMsg(text, type="danger") {
+      const b = document.getElementById("globalMsg");
+      b.className = "alert alert-" + type;
+      b.innerText = text;
+      b.classList.remove("d-none");
+      setTimeout(() => b.classList.add("d-none"), 3000);
+    }
+ 
+    async function loadBudgets() {
+      const { data } = await sb.from("budgets").select("*").eq("user_id", currentUser.id).order("created_at");
+      const budgets = data || [];
+      const list = document.getElementById("budgetList");
+      if (!budgets.length) { list.innerHTML = '<div class="text-muted text-center py-3">No budgets yet. Add one above.</div>'; }
+      else {
+        list.innerHTML = budgets.map(b => `
+          <div class="d-flex align-items-center py-2 border-bottom">
+            <span class="fw-semibold flex-fill">${b.category}</span>
+            <span class="badge bg-success-subtle text-success fw-semibold px-2 py-1 me-2">$${parseFloat(b.amount).toFixed(0)}</span>
+            <button class="btn btn-outline-danger btn-sm" onclick="deleteBudget('${b.id}')">🗑️</button>
+          </div>`).join("");
+      }
+      // Load progress
+      await loadBudgetProgress(budgets);
+    }
+ 
+    async function loadBudgetProgress(budgets) {
+      const now = new Date();
+      const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split("T")[0];
+      const { data: expenses } = await sb.from("expenses").select("category,amount").eq("user_id", currentUser.id).gte("date", monthStart);
+      const expenseMap = {};
+      (expenses || []).forEach(e => { expenseMap[e.category] = (expenseMap[e.category] || 0) + parseFloat(e.amount); });
+ 
+      const prog = document.getElementById("budgetProgress");
+      if (!budgets.length) { prog.innerHTML = '<div class="text-muted">No budgets set.</div>'; return; }
+      prog.innerHTML = budgets.map(b => {
+        const spent = expenseMap[b.category] || 0;
+        const pct = Math.min(100, Math.round((spent / b.amount) * 100));
+        const color = pct >= 100 ? "bg-danger" : pct >= 80 ? "bg-warning" : "bg-success";
+        return `<div class="mb-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span class="fw-medium">${b.category}</span>
+            <span class="small ${pct >= 100 ? 'text-danger' : 'text-muted'}">$${spent.toFixed(0)} / $${parseFloat(b.amount).toFixed(0)} (${pct}%)</span>
+          </div>
+          <div class="progress" style="height:10px;">
+            <div class="progress-bar ${color}" style="width:${pct}%"></div>
+          </div>
+        </div>`;
+      }).join("");
+    }
+ 
+    async function loadIncome() {
+      const { data } = await sb.from("income_sources").select("*").eq("user_id", currentUser.id).order("created_at");
+      const sources = data || [];
+      const tbody = document.getElementById("incomeTableBody");
+      if (!sources.length) { tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">No income sources yet.</td></tr>'; return; }
+      tbody.innerHTML = sources.map(s => `<tr>
+        <td>💰 ${s.category}</td>
+        <td class="fw-semibold">$${parseFloat(s.amount).toFixed(0)}</td>
+        <td><span class="badge bg-primary-subtle text-primary">${s.timeframe}</span></td>
+        <td class="text-center"><button class="btn btn-outline-danger btn-sm" onclick="deleteIncome('${s.id}')">🗑️</button></td>
+      </tr>`).join("");
+    }
+ 
+    window.deleteBudget = async function(id) {
+      await sb.from("budgets").delete().eq("id", id);
+      showMsg("Deleted ✅", "success");
+      await loadBudgets();
+    };
+ 
+    window.deleteIncome = async function(id) {
+      await sb.from("income_sources").delete().eq("id", id);
+      showMsg("Deleted ✅", "success");
+      await loadIncome();
+    };
+ 
+    document.getElementById("addBudgetBtn").addEventListener("click", async () => {
+      const category = document.getElementById("budgetCategory").value.trim();
+      const amount = parseFloat(document.getElementById("budgetAmount").value);
+      if (!category || !amount) { showMsg("Enter category and amount."); return; }
+      const { error } = await sb.from("budgets").insert({ user_id: currentUser.id, category, amount });
+      if (error) { showMsg(error.message); return; }
+      document.getElementById("budgetCategory").value = "";
+      document.getElementById("budgetAmount").value = "";
+      showMsg("Budget added ✅", "success");
+      await loadBudgets();
+    });
+ 
+    document.getElementById("saveIncomeBtn").addEventListener("click", async () => {
+      const category = document.getElementById("incomeCategory").value.trim();
+      const amount = parseFloat(document.getElementById("incomeAmount").value);
+      const timeframe = document.getElementById("incomeTimeframe").value;
+      if (!category || !amount) { showMsg("Enter income category and amount."); return; }
+      const { error } = await sb.from("income_sources").insert({ user_id: currentUser.id, category, amount, timeframe });
+      if (error) { showMsg(error.message); return; }
+      document.getElementById("incomeCategory").value = "";
+      document.getElementById("incomeAmount").value = "";
+      showMsg("Income saved ✅", "success");
+      await loadIncome();
+    });
+ 
+    document.addEventListener("DOMContentLoaded", async () => {
+      const { data: { user } } = await sb.auth.getUser();
+      if (!user) { window.location.href = "login.html"; return; }
+      currentUser = user;
+      const { data } = await sb.from("users").select("name,email").eq("id",user.id).single();
+      if (data) {
+        document.querySelectorAll(".profile-heading").forEach(el => el.innerText = data.name || "");
+        document.querySelectorAll(".user-email").forEach(el => el.innerText = data.email || user.email || "");
+      }
+      document.querySelectorAll("a.text-danger").forEach(el => {
+        el.addEventListener("click", async (e) => { e.preventDefault(); await sb.auth.signOut(); window.location.href = "../index.html"; });
+      });
+      await loadBudgets();
+      await loadIncome();
+    });
+  </script>
 </body>
 </html>
-

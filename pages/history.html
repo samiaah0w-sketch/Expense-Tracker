@@ -8,167 +8,88 @@
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body class="bg-light">
-  <!-- Mobile Sidebar (Offcanvas) -->
   <div class="offcanvas offcanvas-start mobile-sidebar" tabindex="-1" id="mobileSidebar">
-    <div class="offcanvas-header">
-      <h5 class="fw-bold">Menu</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div class="user-info">
-      <div class="d-flex align-items-center gap-3">
-        <div class="user-avatar">👤</div>
-        <div>
-          <h6 class="mb-0 fw-bold">John Doe</h6>
-          <p class="mb-0 text-muted small">john@example.com</p>
-        </div>
-      </div>
-    </div>
-    <div class="offcanvas-body">
-      <div class="nav-menu">
-        <div class="list-group list-group-flush">
-          <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
-          <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
-          <a href="bills.html" class="list-group-item list-group-item-action">Manage Bills</a>
-          <a href="history.html" class="list-group-item list-group-item-action active">Expense History</a>
-          <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
-          <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
-          <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
-          <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
-          <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
-        </div>
-      </div>
-    </div>
+    <div class="offcanvas-header"><h5 class="fw-bold">Menu</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button></div>
+    <div class="user-info"><div class="d-flex align-items-center gap-3"><div class="user-avatar">👤</div><div><h6 class="mb-0 fw-bold profile-heading"></h6><p class="mb-0 text-muted small user-email"></p></div></div></div>
+    <div class="offcanvas-body"><div class="nav-menu"><div class="list-group list-group-flush">
+      <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
+      <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+      <a href="bills.html" class="list-group-item list-group-item-action">Manage Bills</a>
+      <a href="history.html" class="list-group-item list-group-item-action active">Expense History</a>
+      <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
+      <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
+      <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
+      <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
+      <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
+    </div></div></div>
   </div>
-
-  <!-- Mobile Header -->
+ 
   <header class="py-2 d-lg-none fixed-top bg-white shadow-sm">
     <div class="container d-flex align-items-center justify-content-between">
       <button class="btn border-0 p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
       </button>
       <span class="fw-bold text-success">Expense Tracker</span>
-      <a href="profile.html" class="btn p-0">
-        <div style="width: 32px; height: 32px; display: grid; place-items: center; border-radius: 8px; background: rgba(45, 212, 191, 0.2); color: #0f766e;">👤</div>
-      </a>
+      <a href="profile.html" class="btn p-0"><div style="width:32px;height:32px;display:grid;place-items:center;border-radius:8px;background:rgba(45,212,191,0.2);color:#0f766e;">👤</div></a>
     </div>
   </header>
-
+ 
   <main class="py-5">
     <div class="container">
       <div class="row gy-4">
-        <!-- Desktop Sidebar -->
         <div class="col-lg-3 d-none d-lg-block">
           <div class="sidebar-panel p-4 shadow-sm">
             <div class="d-flex align-items-center gap-3 mb-4">
               <div class="profile-avatar">👤</div>
-              <div>
-                <h5 class="mb-1 profile-heading">John Doe</h5>
-                <p class="mb-0 text-muted">john@example.com</p>
-              </div>
+              <div><h5 class="mb-1 profile-heading"></h5><p class="mb-0 text-muted user-email"></p></div>
             </div>
-            <div class="sidebar-nav">
-              <div class="list-group list-group-flush">
-                <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
-                <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
-                <a href="bills.html" class="list-group-item list-group-item-action">Manage Bills</a>
-                <a href="history.html" class="list-group-item list-group-item-action active">Expense History</a>
-                <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
-                <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
-                <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
-                <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
-                <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
-              </div>
-            </div>
+            <div class="sidebar-nav"><div class="list-group list-group-flush">
+              <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
+              <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+              <a href="bills.html" class="list-group-item list-group-item-action">Manage Bills</a>
+              <a href="history.html" class="list-group-item list-group-item-action active">Expense History</a>
+              <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
+              <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
+              <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
+              <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
+              <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
+            </div></div>
           </div>
         </div>
-        <!-- Main Content -->
+ 
         <div class="col-lg-9">
           <div class="p-4 shadow-sm mb-4 bg-white rounded-4">
             <div class="d-flex flex-wrap align-items-center gap-3 mb-4 justify-content-between">
               <div class="d-flex gap-2 align-items-center flex-wrap">
                 <span class="fw-bold fs-5 me-2">Filter</span>
-                <div class="btn-group" role="group" aria-label="Filter">
-                  <button type="button" class="btn btn-success px-4 active">Daily</button>
-                  <button type="button" class="btn btn-outline-success px-4">Weekly</button>
-                  <button type="button" class="btn btn-outline-success px-4">Monthly</button>
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-success px-4 active" data-filter="all">All</button>
+                  <button type="button" class="btn btn-outline-success px-4" data-filter="Daily">Daily</button>
+                  <button type="button" class="btn btn-outline-success px-4" data-filter="Weekly">Weekly</button>
+                  <button type="button" class="btn btn-outline-success px-4" data-filter="Monthly">Monthly</button>
                 </div>
               </div>
               <div class="d-flex gap-2 align-items-center flex-wrap">
                 <span class="fw-bold fs-5 me-2">Category</span>
-                <select class="form-select" style="min-width: 180px;">
-                  <option selected>Groceries</option>
-                  <option>Rent</option>
-                  <option>Utilities</option>
-                  <option>Entertainment</option>
-                  <option>Dining</option>
+                <select id="categoryFilter" class="form-select" style="min-width:180px;">
+                  <option value="">All Categories</option>
                 </select>
               </div>
               <div class="d-flex gap-2 align-items-center flex-wrap">
-                <input type="text" class="form-control" placeholder="Search" style="min-width: 200px;">
-                <button class="btn btn-outline-success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg></button>
-                <button class="btn btn-info text-white d-flex align-items-center" style="box-shadow: 0 4px 12px rgba(45,212,191,0.12);">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="me-2" viewBox="0 0 16 16"><path d="M10.5 2a.5.5 0 0 1 .5.5V4h1A2.5 2.5 0 0 1 14.5 6.5v5A2.5 2.5 0 0 1 12 14H4a2.5 2.5 0 0 1-2.5-2.5v-5A2.5 2.5 0 0 1 4 4h1V2.5a.5.5 0 0 1 1 0V4h2V2.5a.5.5 0 0 1 1 0V4h1V2.5a.5.5 0 0 1 .5-.5zM4 5A1.5 1.5 0 0 0 2.5 6.5v5A1.5 1.5 0 0 0 4 13h8a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 12 5H4z"/></svg>
-                  View Reports
-                </button>
+                <input type="text" id="searchInput" class="form-control" placeholder="Search" style="min-width:200px;">
+                <a href="reports.html" class="btn btn-info text-white">View Reports</a>
               </div>
             </div>
+            <div id="msgBox" class="alert d-none mb-3"></div>
             <div class="table-responsive">
               <table class="table align-middle mb-0">
                 <thead>
                   <tr>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Payment Method</th>
-                    <th>Amount</th>
-                    <th></th>
+                    <th>Date</th><th>Description</th><th>Category</th><th>Repetition</th><th class="text-end">Amount</th><th></th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr class="bg-white shadow-sm rounded-4 mb-3 align-middle">
-                    <td>Oct 26, 2023</td>
-                    <td>Farmers Market</td>
-                    <td>Groceries</td>
-                    <td>Visa</td>
-                    <td class="fw-bold text-success">$125.00</td>
-                    <td>
-                      <button class="btn btn-outline-success btn-sm me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647.646-.647a.5.5 0 0 1 .708 0z"/><path d="M13.646 3.354l-10 10a.5.5 0 0 0-.168.354v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .354-.146l10-10-2.646-2.646zm-10.354 10.5V14h.146l10-10-.146-.146-10 10z"/></svg></button>
-                      <button class="btn btn-outline-danger btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5H6a.5.5 0 0 1-.5-.5v-7zM4.118 4 4 4.059V4.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-.441l-.118-.059A1.5 1.5 0 0 0 13 2.5V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v.5c0 .356.186.672.474.854zM2.5 4.5V2A2.5 2.5 0 0 1 5 0h6a2.5 2.5 0 0 1 2.5 2v2.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5z"/></svg></button>
-                    </td>
-                  </tr>
-                  <tr class="bg-white shadow-sm rounded-4 mb-3 align-middle">
-                    <td>Oct 27, 2023</td>
-                    <td>Dinling Rent</td>
-                    <td>Groceries</td>
-                    <td>Visa</td>
-                    <td class="fw-bold text-success">$150.00</td>
-                    <td>
-                      <button class="btn btn-outline-success btn-sm me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647.646-.647a.5.5 0 0 1 .708 0z"/><path d="M13.646 3.354l-10 10a.5.5 0 0 0-.168.354v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .354-.146l10-10-2.646-2.646zm-10.354 10.5V14h.146l10-10-.146-.146-10 10z"/></svg></button>
-                      <button class="btn btn-outline-danger btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5H6a.5.5 0 0 1-.5-.5v-7zM4.118 4 4 4.059V4.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-.441l-.118-.059A1.5 1.5 0 0 0 13 2.5V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v.5c0 .356.186.672.474.854zM2.5 4.5V2A2.5 2.5 0 0 1 5 0h6a2.5 2.5 0 0 1 2.5 2v2.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5z"/></svg></button>
-                    </td>
-                  </tr>
-                  <tr class="bg-white shadow-sm rounded-4 mb-3 align-middle">
-                    <td>Oct 18, 2023</td>
-                    <td>Patint Utilities</td>
-                    <td>Groceries</td>
-                    <td>Visa</td>
-                    <td class="fw-bold text-success">$125.00</td>
-                    <td>
-                      <button class="btn btn-outline-success btn-sm me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647.646-.647a.5.5 0 0 1 .708 0z"/><path d="M13.646 3.354l-10 10a.5.5 0 0 0-.168.354v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .354-.146l10-10-2.646-2.646zm-10.354 10.5V14h.146l10-10-.146-.146-10 10z"/></svg></button>
-                      <button class="btn btn-outline-danger btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5H6a.5.5 0 0 1-.5-.5v-7zM4.118 4 4 4.059V4.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-.441l-.118-.059A1.5 1.5 0 0 0 13 2.5V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v.5c0 .356.186.672.474.854zM2.5 4.5V2A2.5 2.5 0 0 1 5 0h6a2.5 2.5 0 0 1 2.5 2v2.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5z"/></svg></button>
-                    </td>
-                  </tr>
-                  <tr class="bg-white shadow-sm rounded-4 mb-3 align-middle">
-                    <td>Oct 16, 2023</td>
-                    <td>Entertainment</td>
-                    <td>Groceries</td>
-                    <td>Visa</td>
-                    <td class="fw-bold text-success">$125.00</td>
-                    <td>
-                      <button class="btn btn-outline-success btn-sm me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647.646-.647a.5.5 0 0 1 .708 0z"/><path d="M13.646 3.354l-10 10a.5.5 0 0 0-.168.354v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .354-.146l10-10-2.646-2.646zm-10.354 10.5V14h.146l10-10-.146-.146-10 10z"/></svg></button>
-                      <button class="btn btn-outline-danger btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5H6a.5.5 0 0 1-.5-.5v-7zM4.118 4 4 4.059V4.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-.441l-.118-.059A1.5 1.5 0 0 0 13 2.5V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v.5c0 .356.186.672.474.854zM2.5 4.5V2A2.5 2.5 0 0 1 5 0h6a2.5 2.5 0 0 1 2.5 2v2.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5z"/></svg></button>
-                    </td>
-                  </tr>
+                <tbody id="expensesTableBody">
+                  <tr><td colspan="6" class="text-center text-muted py-4">Loading...</td></tr>
                 </tbody>
               </table>
             </div>
@@ -177,7 +98,150 @@
       </div>
     </div>
   </main>
-
+ 
+  <!-- Edit Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header"><h5 class="modal-title fw-bold">Edit Expense</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body">
+          <input type="hidden" id="editId" />
+          <div class="mb-3"><label class="form-label fw-semibold">Name</label><input type="text" id="editName" class="form-control" /></div>
+          <div class="mb-3"><label class="form-label fw-semibold">Amount</label><input type="number" id="editAmount" class="form-control" step="0.01" /></div>
+          <div class="mb-3"><label class="form-label fw-semibold">Date</label><input type="date" id="editDate" class="form-control" /></div>
+          <div class="mb-3"><label class="form-label fw-semibold">Category</label><input type="text" id="editCategory" class="form-control" /></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" id="saveEditBtn">Save Changes</button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const sb = supabase.createClient(
+      "https://zwziuzioivscsslccncl.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
+    );
+ 
+    let allExpenses = [];
+    let currentUser = null;
+    let activeFilter = "all";
+ 
+    function showMsg(text, type="danger") {
+      const b = document.getElementById("msgBox");
+      b.className = "alert alert-" + type;
+      b.innerText = text;
+      b.classList.remove("d-none");
+      setTimeout(() => b.classList.add("d-none"), 3000);
+    }
+ 
+    function formatDate(d) {
+      return new Date(d).toLocaleDateString("en-US", {month:"short",day:"numeric",year:"numeric"});
+    }
+ 
+    function renderTable(data) {
+      const tbody = document.getElementById("expensesTableBody");
+      if (!data.length) { tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">No expenses found.</td></tr>'; return; }
+      tbody.innerHTML = data.map(e => `
+        <tr>
+          <td>${formatDate(e.date)}</td>
+          <td>${e.name}</td>
+          <td>${e.category}</td>
+          <td><span class="badge bg-light text-dark border">${e.repetition || ''}</span></td>
+          <td class="text-end fw-bold text-success">$${parseFloat(e.amount).toFixed(2)}</td>
+          <td>
+            <button class="btn btn-outline-success btn-sm me-1" onclick="openEdit('${e.id}')">✏️</button>
+            <button class="btn btn-outline-danger btn-sm" onclick="deleteExpense('${e.id}')">🗑️</button>
+          </td>
+        </tr>`).join("");
+    }
+ 
+    function applyFilters() {
+      const search = document.getElementById("searchInput").value.toLowerCase();
+      const cat = document.getElementById("categoryFilter").value;
+      let filtered = allExpenses;
+      if (activeFilter !== "all") filtered = filtered.filter(e => e.repetition === activeFilter);
+      if (cat) filtered = filtered.filter(e => e.category === cat);
+      if (search) filtered = filtered.filter(e => e.name.toLowerCase().includes(search) || e.category.toLowerCase().includes(search));
+      renderTable(filtered);
+    }
+ 
+    async function loadExpenses() {
+      const { data, error } = await sb.from("expenses").select("*").eq("user_id", currentUser.id).order("date", {ascending:false});
+      if (error) { showMsg(error.message); return; }
+      allExpenses = data || [];
+      // Populate category filter
+      const cats = [...new Set(allExpenses.map(e => e.category))];
+      const sel = document.getElementById("categoryFilter");
+      sel.innerHTML = '<option value="">All Categories</option>' + cats.map(c => `<option>${c}</option>`).join("");
+      renderTable(allExpenses);
+    }
+ 
+    window.openEdit = function(id) {
+      const e = allExpenses.find(x => x.id === id);
+      if (!e) return;
+      document.getElementById("editId").value = e.id;
+      document.getElementById("editName").value = e.name;
+      document.getElementById("editAmount").value = e.amount;
+      document.getElementById("editDate").value = e.date;
+      document.getElementById("editCategory").value = e.category;
+      new bootstrap.Modal(document.getElementById("editModal")).show();
+    };
+ 
+    document.getElementById("saveEditBtn").addEventListener("click", async () => {
+      const id = document.getElementById("editId").value;
+      const updates = {
+        name: document.getElementById("editName").value,
+        amount: parseFloat(document.getElementById("editAmount").value),
+        date: document.getElementById("editDate").value,
+        category: document.getElementById("editCategory").value
+      };
+      const { error } = await sb.from("expenses").update(updates).eq("id", id);
+      if (error) { showMsg(error.message); return; }
+      bootstrap.Modal.getInstance(document.getElementById("editModal")).hide();
+      showMsg("Updated successfully ✅", "success");
+      await loadExpenses(); applyFilters();
+    });
+ 
+    window.deleteExpense = async function(id) {
+      if (!confirm("Delete this expense?")) return;
+      const { error } = await sb.from("expenses").delete().eq("id", id);
+      if (error) { showMsg(error.message); return; }
+      showMsg("Deleted ✅", "success");
+      await loadExpenses(); applyFilters();
+    };
+ 
+    // Filter buttons
+    document.querySelectorAll("[data-filter]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("[data-filter]").forEach(b => { b.classList.remove("btn-success","active"); b.classList.add("btn-outline-success"); });
+        btn.classList.add("btn-success","active"); btn.classList.remove("btn-outline-success");
+        activeFilter = btn.dataset.filter;
+        applyFilters();
+      });
+    });
+ 
+    document.getElementById("searchInput").addEventListener("input", applyFilters);
+    document.getElementById("categoryFilter").addEventListener("change", applyFilters);
+ 
+    document.addEventListener("DOMContentLoaded", async () => {
+      const { data: { user } } = await sb.auth.getUser();
+      if (!user) { window.location.href = "login.html"; return; }
+      currentUser = user;
+      const { data } = await sb.from("users").select("name,email").eq("id",user.id).single();
+      if (data) {
+        document.querySelectorAll(".profile-heading").forEach(el => el.innerText = data.name || "");
+        document.querySelectorAll(".user-email").forEach(el => el.innerText = data.email || user.email || "");
+      }
+      document.querySelectorAll("a.text-danger").forEach(el => {
+        el.addEventListener("click", async (e) => { e.preventDefault(); await sb.auth.signOut(); window.location.href = "../index.html"; });
+      });
+      await loadExpenses();
+    });
+  </script>
 </body>
 </html>

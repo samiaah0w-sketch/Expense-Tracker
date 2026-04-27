@@ -8,51 +8,32 @@
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body class="bg-light">
-  <!-- Mobile Sidebar (Offcanvas) -->
   <div class="offcanvas offcanvas-start mobile-sidebar" tabindex="-1" id="mobileSidebar">
-    <div class="offcanvas-header">
-      <h5 class="fw-bold">Menu</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div class="user-info">
-      <div class="d-flex align-items-center gap-3">
-        <div class="user-avatar">👤</div>
-        <div>
-          <h6 class="mb-0 fw-bold">John Doe</h6>
-          <p class="mb-0 text-muted small">john@example.com</p>
-        </div>
-      </div>
-    </div>
-    <div class="offcanvas-body">
-      <div class="nav-menu">
-        <div class="list-group list-group-flush">
-          <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
-          <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
-          <a href="bills.html" class="list-group-item list-group-item-action active">Manage Bills</a>
-          <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
-          <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
-          <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
-          <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
-          <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
-          <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
-        </div>
-      </div>
-    </div>
+    <div class="offcanvas-header"><h5 class="fw-bold">Menu</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button></div>
+    <div class="user-info"><div class="d-flex align-items-center gap-3"><div class="user-avatar">👤</div><div><h6 class="mb-0 fw-bold profile-heading"></h6><p class="mb-0 text-muted small user-email"></p></div></div></div>
+    <div class="offcanvas-body"><div class="nav-menu"><div class="list-group list-group-flush">
+      <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
+      <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+      <a href="bills.html" class="list-group-item list-group-item-action active">Manage Bills</a>
+      <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
+      <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
+      <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
+      <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
+      <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
+      <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
+    </div></div></div>
   </div>
-
-  <!-- Mobile Header -->
+ 
   <header class="py-2 d-lg-none fixed-top bg-white shadow-sm">
     <div class="container d-flex align-items-center justify-content-between">
       <button class="btn border-0 p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
       </button>
       <span class="fw-bold text-success">Expense Tracker</span>
-      <a href="profile.html" class="btn p-0">
-        <div style="width: 32px; height: 32px; display: grid; place-items: center; border-radius: 8px; background: rgba(45, 212, 191, 0.2); color: #0f766e;">👤</div>
-      </a>
+      <a href="profile.html" class="btn p-0"><div style="width:32px;height:32px;display:grid;place-items:center;border-radius:8px;background:rgba(45,212,191,0.2);color:#0f766e;">👤</div></a>
     </div>
   </header>
-
+ 
   <main class="py-5">
     <div class="container">
       <div class="row gy-4">
@@ -60,200 +41,46 @@
           <div class="sidebar-panel p-4 shadow-sm">
             <div class="d-flex align-items-center gap-3 mb-4">
               <div class="profile-avatar">👤</div>
-              <div>
-                <h5 class="mb-1 profile-heading">John Doe</h5>
-                <p class="mb-0 text-muted">john@example.com</p>
-              </div>
+              <div><h5 class="mb-1 profile-heading"></h5><p class="mb-0 text-muted user-email"></p></div>
             </div>
-            <div class="sidebar-nav">
-              <div class="list-group list-group-flush">
-                <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
-                <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
-                <a href="bills.html" class="list-group-item list-group-item-action active">Manage Bills</a>
-                <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
-                <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
-                <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
-                <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
-                <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
-                <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
-              </div>
-            </div>
+            <div class="sidebar-nav"><div class="list-group list-group-flush">
+              <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
+              <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+              <a href="bills.html" class="list-group-item list-group-item-action active">Manage Bills</a>
+              <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
+              <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
+              <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
+              <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
+              <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
+              <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
+            </div></div>
           </div>
         </div>
+ 
         <div class="col-lg-9">
-          <!-- Bill Summary Cards -->
+          <!-- Summary Cards (dynamic) -->
           <div class="row g-4 mb-4">
-            <div class="col-md-6 col-xl-3">
-              <div class="card shadow-sm p-4 h-100">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <span class="fw-semibold">Total Bills</span>
-                  <span class="text-success">📋</span>
-                </div>
-                <div class="fs-4 fw-bold">12</div>
-                <div class="text-muted">This month</div>
-              </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-              <div class="card shadow-sm p-4 h-100">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <span class="fw-semibold">Paid</span>
-                  <span class="text-success">✓</span>
-                </div>
-                <div class="fs-4 fw-bold text-success">8</div>
-                <div class="text-muted">$1,240.00</div>
-              </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-              <div class="card shadow-sm p-4 h-100">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <span class="fw-semibold">Unpaid</span>
-                  <span class="text-warning">⏳</span>
-                </div>
-                <div class="fs-4 fw-bold text-warning">4</div>
-                <div class="text-muted">$650.00</div>
-              </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-              <div class="card shadow-sm p-4 h-100 border-danger-subtle">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <span class="fw-semibold">Due Soon</span>
-                  <span class="text-danger">⚠️</span>
-                </div>
-                <div class="fs-4 fw-bold text-danger">2</div>
-                <div class="text-muted">Next 3 days</div>
-              </div>
-            </div>
+            <div class="col-md-6 col-xl-3"><div class="card shadow-sm p-4 h-100"><div class="d-flex justify-content-between align-items-center mb-2"><span class="fw-semibold">Total Bills</span><span class="text-success">📋</span></div><div class="fs-4 fw-bold" id="totalBills">0</div><div class="text-muted">This month</div></div></div>
+            <div class="col-md-6 col-xl-3"><div class="card shadow-sm p-4 h-100"><div class="d-flex justify-content-between align-items-center mb-2"><span class="fw-semibold">Paid</span><span class="text-success">✓</span></div><div class="fs-4 fw-bold text-success" id="paidCount">0</div><div class="text-muted" id="paidAmount">$0.00</div></div></div>
+            <div class="col-md-6 col-xl-3"><div class="card shadow-sm p-4 h-100"><div class="d-flex justify-content-between align-items-center mb-2"><span class="fw-semibold">Unpaid</span><span class="text-warning">⏳</span></div><div class="fs-4 fw-bold text-warning" id="unpaidCount">0</div><div class="text-muted" id="unpaidAmount">$0.00</div></div></div>
+            <div class="col-md-6 col-xl-3"><div class="card shadow-sm p-4 h-100 border-danger-subtle"><div class="d-flex justify-content-between align-items-center mb-2"><span class="fw-semibold">Due Soon</span><span class="text-danger">⚠️</span></div><div class="fs-4 fw-bold text-danger" id="dueSoonCount">0</div><div class="text-muted">Next 3 days</div></div></div>
           </div>
-
-          <!-- Add New Bill Button -->
-          <div class="mb-4">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addBillModal">
-              + Add New Bill
-            </button>
-          </div>
-
-          <!-- Bills List -->
+ 
+          <div class="mb-4"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addBillModal">+ Add New Bill</button></div>
+          <div id="msgBox" class="alert d-none mb-3"></div>
+ 
           <div class="card shadow-sm mb-4">
-            <div class="card-header bg-white py-3">
-              <h5 class="fw-bold mb-0">All Bills</h5>
-            </div>
+            <div class="card-header bg-white py-3"><h5 class="fw-bold mb-0">All Bills</h5></div>
             <div class="card-body p-0">
               <div class="table-responsive">
                 <table class="table table-hover mb-0">
                   <thead class="table-light">
-                    <tr>
-                      <th class="ps-4">Bill Name</th>
-                      <th>Category</th>
-                      <th>Amount</th>
-                      <th>Due Date</th>
-                      <th>Status</th>
-                      <th class="pe-4">Action</th>
-                    </tr>
+                    <tr><th class="ps-4">Bill Name</th><th>Category</th><th>Amount</th><th>Due Date</th><th>Status</th><th class="pe-4">Action</th></tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td class="ps-4 fw-semibold">Electricity Bill</td>
-                      <td>Utilities</td>
-                      <td>$120.00</td>
-                      <td>Apr 28, 2026</td>
-                      <td><span class="badge bg-warning text-dark">Due Soon</span></td>
-                      <td><button class="btn btn-sm btn-outline-success">Pay Now</button></td>
-                    </tr>
-                    <tr>
-                      <td class="ps-4 fw-semibold">Internet Bill</td>
-                      <td>Utilities</td>
-                      <td>$45.00</td>
-                      <td>Apr 30, 2026</td>
-                      <td><span class="badge bg-secondary">Pending</span></td>
-                      <td><button class="btn btn-sm btn-outline-success">Pay Now</button></td>
-                    </tr>
-                    <tr>
-                      <td class="ps-4 fw-semibold">Rent Payment</td>
-                      <td>Housing</td>
-                      <td>$800.00</td>
-                      <td>May 01, 2026</td>
-                      <td><span class="badge bg-secondary">Pending</span></td>
-                      <td><button class="btn btn-sm btn-outline-success">Pay Now</button></td>
-                    </tr>
-                    <tr>
-                      <td class="ps-4 fw-semibold">Water Bill</td>
-                      <td>Utilities</td>
-                      <td>$35.00</td>
-                      <td>Apr 15, 2026</td>
-                      <td><span class="badge bg-success">Paid</span></td>
-                      <td><button class="btn btn-sm btn-outline-secondary">View</button></td>
-                    </tr>
-                    <tr>
-                      <td class="ps-4 fw-semibold">Phone Bill</td>
-                      <td>Utilities</td>
-                      <td>$50.00</td>
-                      <td>Apr 10, 2026</td>
-                      <td><span class="badge bg-success">Paid</span></td>
-                      <td><button class="btn btn-sm btn-outline-secondary">View</button></td>
-                    </tr>
-                    <tr>
-                      <td class="ps-4 fw-semibold">Gas Bill</td>
-                      <td>Utilities</td>
-                      <td>$65.00</td>
-                      <td>Apr 05, 2026</td>
-                      <td><span class="badge bg-success">Paid</span></td>
-                      <td><button class="btn btn-sm btn-outline-secondary">View</button></td>
-                    </tr>
+                  <tbody id="billsTableBody">
+                    <tr><td colspan="6" class="text-center text-muted py-4">Loading...</td></tr>
                   </tbody>
                 </table>
-              </div>
-            </div>
-          </div>
-
-          <!-- Recurring Bills Section -->
-          <div class="card shadow-sm">
-            <div class="card-header bg-white py-3">
-              <h5 class="fw-bold mb-0">Recurring Bills</h5>
-            </div>
-            <div class="card-body">
-              <div class="row g-3">
-                <div class="col-md-6 col-lg-4">
-                  <div class="p-3 rounded-4 border">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="fw-semibold">Netflix</span>
-                      <span class="badge bg-primary">Monthly</span>
-                    </div>
-                    <div class="fs-5 fw-bold">$15.99</div>
-                    <div class="text-muted small">Due: May 05, 2026</div>
-                    <div class="mt-2 form-check form-switch">
-                      <input class="form-check-input" type="checkbox" checked>
-                      <label class="form-check-label small">Auto-pay</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                  <div class="p-3 rounded-4 border">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="fw-semibold">Spotify</span>
-                      <span class="badge bg-primary">Monthly</span>
-                    </div>
-                    <div class="fs-5 fw-bold">$9.99</div>
-                    <div class="text-muted small">Due: May 10, 2026</div>
-                    <div class="mt-2 form-check form-switch">
-                      <input class="form-check-input" type="checkbox">
-                      <label class="form-check-label small">Auto-pay</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                  <div class="p-3 rounded-4 border">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="fw-semibold">Insurance</span>
-                      <span class="badge bg-info">Yearly</span>
-                    </div>
-                    <div class="fs-5 fw-bold">$120.00</div>
-                    <div class="text-muted small">Due: June 15, 2026</div>
-                    <div class="mt-2 form-check form-switch">
-                      <input class="form-check-input" type="checkbox" checked>
-                      <label class="form-check-label small">Auto-pay</label>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -261,59 +88,146 @@
       </div>
     </div>
   </main>
-
+ 
   <!-- Add Bill Modal -->
   <div class="modal fade" id="addBillModal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title fw-bold">Add New Bill</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
+        <div class="modal-header"><h5 class="modal-title fw-bold">Add New Bill</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
         <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Bill Name</label>
-              <input type="text" class="form-control" placeholder="Enter bill name..." required />
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Category</label>
-              <select class="form-select" required>
-                <option value="">Select category...</option>
-                <option>Utilities</option>
-                <option>Housing</option>
-                <option>Subscriptions</option>
-                <option>Insurance</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Amount</label>
-              <input type="number" class="form-control" placeholder="$0.00" min="0" step="0.01" required />
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Due Date</label>
-              <input type="date" class="form-control" required />
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Recurrence</label>
-              <select class="form-select">
-                <option>One-time</option>
-                <option>Weekly</option>
-                <option>Monthly</option>
-                <option>Yearly</option>
-              </select>
-            </div>
-            <div class="d-flex gap-2">
-              <button type="submit" class="btn btn-success flex-grow-1">Add Bill</button>
-              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-            </div>
-          </form>
+          <div id="modalMsg" class="alert d-none mb-3"></div>
+          <div class="mb-3"><label class="form-label fw-semibold">Bill Name</label><input type="text" id="billName" class="form-control" placeholder="Enter bill name..." required /></div>
+          <div class="mb-3"><label class="form-label fw-semibold">Category</label>
+            <select id="billCategory" class="form-select" required>
+              <option value="">Select category...</option>
+              <option>Utilities</option><option>Housing</option><option>Subscriptions</option><option>Insurance</option><option>Other</option>
+            </select>
+          </div>
+          <div class="mb-3"><label class="form-label fw-semibold">Amount</label><input type="number" id="billAmount" class="form-control" placeholder="0.00" min="0" step="0.01" required /></div>
+          <div class="mb-3"><label class="form-label fw-semibold">Due Date</label><input type="date" id="billDueDate" class="form-control" required /></div>
+          <div class="mb-3"><label class="form-label fw-semibold">Recurrence</label>
+            <select id="billRecurrence" class="form-select">
+              <option>One-time</option><option>Weekly</option><option>Monthly</option><option>Yearly</option>
+            </select>
+          </div>
+          <div class="d-flex gap-2">
+            <button type="button" id="saveBillBtn" class="btn btn-success flex-grow-1">Add Bill</button>
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
+ 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const sb = supabase.createClient(
+      "https://zwziuzioivscsslccncl.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
+    );
+    let currentUser = null;
+ 
+    function showMsg(id, text, type="danger") {
+      const b = document.getElementById(id);
+      b.className = "alert alert-" + type;
+      b.innerText = text;
+      b.classList.remove("d-none");
+      setTimeout(() => b.classList.add("d-none"), 3000);
+    }
+ 
+    function statusBadge(status) {
+      const map = { Paid: "bg-success", Pending: "bg-secondary", "Due Soon": "bg-warning text-dark" };
+      return `<span class="badge ${map[status] || 'bg-secondary'}">${status}</span>`;
+    }
+ 
+    function getDueSoonStatus(dueDate) {
+      const today = new Date(); today.setHours(0,0,0,0);
+      const due = new Date(dueDate); due.setHours(0,0,0,0);
+      const diff = (due - today) / 86400000;
+      if (diff < 0) return "Pending";
+      if (diff <= 3) return "Due Soon";
+      return "Pending";
+    }
+ 
+    async function loadBills() {
+      const { data, error } = await sb.from("bills").select("*").eq("user_id", currentUser.id).order("due_date");
+      if (error) { showMsg("msgBox", error.message); return; }
+      const bills = data || [];
+ 
+      // Summary
+      const paid = bills.filter(b => b.status === "Paid");
+      const unpaid = bills.filter(b => b.status !== "Paid");
+      const dueSoon = bills.filter(b => b.status !== "Paid" && getDueSoonStatus(b.due_date) === "Due Soon");
+      document.getElementById("totalBills").innerText = bills.length;
+      document.getElementById("paidCount").innerText = paid.length;
+      document.getElementById("paidAmount").innerText = "$" + paid.reduce((s,b) => s + parseFloat(b.amount), 0).toFixed(2);
+      document.getElementById("unpaidCount").innerText = unpaid.length;
+      document.getElementById("unpaidAmount").innerText = "$" + unpaid.reduce((s,b) => s + parseFloat(b.amount), 0).toFixed(2);
+      document.getElementById("dueSoonCount").innerText = dueSoon.length;
+ 
+      const tbody = document.getElementById("billsTableBody");
+      if (!bills.length) { tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">No bills yet.</td></tr>'; return; }
+      tbody.innerHTML = bills.map(b => {
+        const status = b.status === "Paid" ? "Paid" : getDueSoonStatus(b.due_date) === "Due Soon" ? "Due Soon" : "Pending";
+        const actionBtn = b.status === "Paid"
+          ? `<button class="btn btn-sm btn-outline-secondary" onclick="deleteBill('${b.id}')">Delete</button>`
+          : `<button class="btn btn-sm btn-outline-success" onclick="markPaid('${b.id}')">Pay Now</button>
+             <button class="btn btn-sm btn-outline-danger ms-1" onclick="deleteBill('${b.id}')">🗑️</button>`;
+        return `<tr>
+          <td class="ps-4 fw-semibold">${b.name}</td>
+          <td>${b.category}</td>
+          <td>$${parseFloat(b.amount).toFixed(2)}</td>
+          <td>${new Date(b.due_date).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}</td>
+          <td>${statusBadge(status)}</td>
+          <td>${actionBtn}</td>
+        </tr>`;
+      }).join("");
+    }
+ 
+    window.markPaid = async function(id) {
+      const { error } = await sb.from("bills").update({ status: "Paid" }).eq("id", id);
+      if (error) { showMsg("msgBox", error.message); return; }
+      showMsg("msgBox", "Marked as paid ✅", "success");
+      await loadBills();
+    };
+ 
+    window.deleteBill = async function(id) {
+      if (!confirm("Delete this bill?")) return;
+      const { error } = await sb.from("bills").delete().eq("id", id);
+      if (error) { showMsg("msgBox", error.message); return; }
+      showMsg("msgBox", "Deleted ✅", "success");
+      await loadBills();
+    };
+ 
+    document.getElementById("saveBillBtn").addEventListener("click", async () => {
+      const name = document.getElementById("billName").value.trim();
+      const category = document.getElementById("billCategory").value;
+      const amount = parseFloat(document.getElementById("billAmount").value);
+      const due_date = document.getElementById("billDueDate").value;
+      const recurrence = document.getElementById("billRecurrence").value;
+      if (!name || !category || !amount || !due_date) { showMsg("modalMsg", "Fill all fields."); return; }
+      const { error } = await sb.from("bills").insert({ user_id: currentUser.id, name, category, amount, due_date, recurrence, status: "Pending" });
+      if (error) { showMsg("modalMsg", error.message); return; }
+      bootstrap.Modal.getInstance(document.getElementById("addBillModal")).hide();
+      showMsg("msgBox", "Bill added ✅", "success");
+      await loadBills();
+    });
+ 
+    document.addEventListener("DOMContentLoaded", async () => {
+      const { data: { user } } = await sb.auth.getUser();
+      if (!user) { window.location.href = "login.html"; return; }
+      currentUser = user;
+      const { data } = await sb.from("users").select("name,email").eq("id", user.id).single();
+      if (data) {
+        document.querySelectorAll(".profile-heading").forEach(el => el.innerText = data.name || "");
+        document.querySelectorAll(".user-email").forEach(el => el.innerText = data.email || user.email || "");
+      }
+      document.querySelectorAll("a.text-danger").forEach(el => {
+        el.addEventListener("click", async (e) => { e.preventDefault(); await sb.auth.signOut(); window.location.href = "../index.html"; });
+      });
+      await loadBills();
+    });s
+  </script>
 </body>
 </html>
