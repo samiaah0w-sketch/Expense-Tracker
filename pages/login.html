@@ -147,42 +147,40 @@
   </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
-const supabaseClient = supabase.createClient(
-  "https://zwziuzioivscsslccncl.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
-);
+  const supabaseClient = supabase.createClient(
+    "https://zwziuzioivscsslccncl.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
+  )
 
-function showMessage(text, type){
-  const msg = document.getElementById("msgBox");
-  msg.className = "alert alert-" + type;
-  msg.innerText = text;
-  msg.classList.remove("d-none");
-}
+  // Auto-redirect if already logged in
+  supabaseClient.auth.getUser().then(({ data: { user } }) => {
+    if (user) window.location.href = "dashboard.html"
+  })
 
-document.getElementById("loginForm").addEventListener("submit", async function(e){
-  e.preventDefault();
-
-  const email = loginEmail.value;
-  const password = loginPassword.value;
-
-  const { error } = await supabaseClient.auth.signInWithPassword({
-    email,
-    password
-  });
-
-  if(error){
-    showMessage(error.message, "danger");
-    return;
+  function showMessage(text, type) {
+    const msg = document.getElementById("msgBox")
+    msg.className = "alert alert-" + type
+    msg.innerText = text
+    msg.classList.remove("d-none")
   }
 
-  showMessage("Login success!", "success");
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault()
 
- setTimeout(() => {
-  window.location.href = "dashboard.html";
-}, 1000);
-});
+    const email    = document.getElementById("loginEmail").value
+    const password = document.getElementById("loginPassword").value
+
+    const { error } = await supabaseClient.auth.signInWithPassword({ email, password })
+
+    if (error) {
+      showMessage(error.message, "danger")
+      return
+    }
+
+    showMessage("Login successful! Redirecting...", "success")
+    setTimeout(() => window.location.href = "dashboard.html", 1000)
+  })
 </script>
 </body>
 </html>

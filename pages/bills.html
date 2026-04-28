@@ -175,7 +175,7 @@
           : `<button class="btn btn-sm btn-outline-success" onclick="markPaid('${b.id}')">Pay Now</button>
              <button class="btn btn-sm btn-outline-danger ms-1" onclick="deleteBill('${b.id}')">🗑️</button>`;
         return `<tr>
-          <td class="ps-4 fw-semibold">${b.name}</td>
+          <td class="ps-4 fw-semibold">${b.bill_name}</td>
           <td>${b.category}</td>
           <td>$${parseFloat(b.amount).toFixed(2)}</td>
           <td>${new Date(b.due_date).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}</td>
@@ -207,7 +207,7 @@
       const due_date = document.getElementById("billDueDate").value;
       const recurrence = document.getElementById("billRecurrence").value;
       if (!name || !category || !amount || !due_date) { showMsg("modalMsg", "Fill all fields."); return; }
-      const { error } = await sb.from("bills").insert({ user_id: currentUser.id, name, category, amount, due_date, recurrence, status: "Pending" });
+      const { error } = await sb.from("bills").insert({ user_id: currentUser.id, bill_name: name, category, amount, due_date, status: "Pending" });
       if (error) { showMsg("modalMsg", error.message); return; }
       bootstrap.Modal.getInstance(document.getElementById("addBillModal")).hide();
       showMsg("msgBox", "Bill added ✅", "success");
@@ -227,7 +227,7 @@
         el.addEventListener("click", async (e) => { e.preventDefault(); await sb.auth.signOut(); window.location.href = "../index.html"; });
       });
       await loadBills();
-    });s
+    });
   </script>
 </body>
 </html>

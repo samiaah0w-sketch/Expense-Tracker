@@ -231,5 +231,137 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const sb = supabase.createClient(
+    "https://zwziuzioivscsslccncl.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
+  )
+
+  let currentUser = null
+
+  // ── Load shared expenses from Supabase ──
+  async function loadShared() {
+    const { data, error } = await sb
+      .from("shared_expenses")
+      .select("*")
+      .eq("created_by", currentUser.id)
+      .order("id", { ascending: false })
+
+    const list = data || []
+
+    // Summary
+    const total = list.reduce((s, e) => s + parseFloat(e.amount), 0)
+    const settled = list.filter(e => e.is_settled).reduce((s, e) => s + parseFloat(e.amount), 0)
+    const unsettled = total - settled
+
+    document.getElementById("totalSpending").innerText = "$" + total.toFixed(2)
+    document.getElementById("youOwe").innerText        = "$" + unsettled.toFixed(2)
+    document.getElementById("youAreOwed").innerText    = "$" + settled.toFixed(2)
+
+    // Table
+    const tbody = document.getElementById("sharedTableBody")
+    if (!list.length) {
+      tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted py-3">No shared expenses yet.</td></tr>'
+      return
+    }
+    tbody.innerHTML = list.map(e => `
+      <tr>
+        <td>${e.description}</td>
+        <td>${new Date(e.id).toLocaleDateString() || '—'}</td>
+        <td>$${parseFloat(e.amount).toFixed(2)}</td>
+        <td>
+          ${e.member_name}
+          ${!e.is_settled
+            ? `<button class="btn btn-success btn-sm ms-2" onclick="settle('${e.id}')">Settle</button>`
+            : `<span class="badge bg-success ms-2">Settled</span>`}
+          <button class="btn btn-outline-danger btn-sm ms-1" onclick="deleteShared('${e.id}')">🗑️</button>
+        </td>
+      </tr>`).join("")
+
+    // Members list
+    const members = [...new Set(list.map(e => e.member_name))]
+    document.getElementById("membersList").innerHTML = members.map(m => {
+      const initials = m.split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2)
+      const memberTotal = list.filter(e => e.member_name === m).reduce((s, e) => s + parseFloat(e.amount), 0)
+      return `
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="text-center p-3 rounded-4" style="background:rgba(45,212,191,0.08);">
+            <div class="rounded-circle mx-auto mb-2" style="width:48px;height:48px;background:#0f766e;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;">${initials}</div>
+            <h6 class="mb-0">${m}</h6>
+            <small class="text-muted">$${memberTotal.toFixed(2)}</small>
+          </div>
+        </div>`
+    }).join("")
+  }
+
+  // ── Add shared expense ──
+  document.querySelector("form").addEventListener("submit", async (e) => {
+    e.preventDefault()
+
+    const description = document.getElementById("expenseName").value.trim()
+    const amount      = parseFloat(document.getElementById("amount").value)
+    const member_name = document.getElementById("searchUsers").value.trim()
+
+    if (!description || !amount || !member_name) {
+      alert("Please fill in expense name, amount and member name.")
+      return
+    }
+
+    const { error } = await sb.from("shared_expenses").insert({
+      created_by:  currentUser.id,
+      description,
+      amount,
+      member_name,
+      is_settled:  false
+    })
+
+    if (error) { alert(error.message); return }
+
+    document.querySelector("form").reset()
+    await loadShared()
+  })
+
+  // ── Settle expense ──
+  window.settle = async function(id) {
+    await sb.from("shared_expenses").update({ is_settled: true }).eq("id", id)
+    await loadShared()
+  }
+
+  // ── Delete expense ──
+  window.deleteShared = async function(id) {
+    if (!confirm("Delete this shared expense?")) return
+    await sb.from("shared_expenses").delete().eq("id", id)
+    await loadShared()
+  }
+
+  // ── Init ──
+  document.addEventListener("DOMContentLoaded", async () => {
+    const { data: { user } } = await sb.auth.getUser()
+    if (!user) { window.location.href = "login.html"; return }
+    currentUser = user
+
+    // Load profile in sidebar
+    const { data } = await sb.from("users").select("name,email").eq("id", user.id).single()
+    if (data) {
+      document.querySelectorAll(".profile-heading").forEach(el => el.innerText = data.name || "")
+      document.querySelectorAll("p.mb-0.text-muted.small, p.mb-0.text-muted")
+        .forEach(el => { if (el.innerText.includes("@") || el.innerText === "john@example.com") el.innerText = data.email || user.email })
+      document.querySelectorAll("h5.mb-1, h6.mb-0.fw-bold")
+        .forEach(el => { if (el.innerText === "John Doe") el.innerText = data.name || "" })
+    }
+
+    // Logout
+    document.querySelectorAll("a.text-danger").forEach(el => {
+      el.addEventListener("click", async (e) => {
+        e.preventDefault()
+        await sb.auth.signOut()
+        window.location.href = "../index.html"
+      })
+    })
+
+    await loadShared()
+  })
+</script>
 </body>
 </html>

@@ -161,13 +161,9 @@
       document.getElementById("totalExpenses").innerText = "$" + totalExp.toFixed(2);
  
       // Income
-      const { data: income } = await sb.from("income_sources").select("amount,timeframe").eq("user_id", user.id);
-      const totalIncome = (income || []).reduce((s,i) => {
-        let m = parseFloat(i.amount);
-        if (i.timeframe === "Daily") m *= 30;
-        else if (i.timeframe === "Weekly") m *= 4;
-        return s + m;
-      }, 0);
+     const { data: income } = await sb.from("incomes").select("amount").eq("user_id", user.id);
+     const totalIncome = (income || []).reduce((s, i) => s + parseFloat(i.amount), 0);
+
       document.getElementById("totalIncome").innerText = "$" + totalIncome.toFixed(2);
  
       const savings = totalIncome - totalExp;
@@ -186,7 +182,7 @@
       const recent = expList.slice(0,5);
       const tbody = document.getElementById("recentTransactions");
       tbody.innerHTML = recent.length
-        ? recent.map(e => `<tr><td>${e.name}</td><td>${e.category}</td><td>${new Date(e.date).toLocaleDateString("en-US",{month:"short",day:"numeric"})}</td><td class="text-end text-danger">-$${parseFloat(e.amount).toFixed(2)}</td></tr>`).join("")
+        ?recent.map(e => `<tr><td>${e.title}</td><td>${e.category}</td><td>${new Date(e.date).toLocaleDateString("en-US",{month:"short",day:"numeric"})}</td><td class="text-end text-danger">-$${parseFloat(e.amount).toFixed(2)}</td></tr>`).join("")
         : '<tr><td colspan="4" class="text-center text-muted py-3">No transactions this month.</td></tr>';
  
       // Pie chart by category

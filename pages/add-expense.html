@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -244,8 +242,8 @@
       }
  
       const { error } = await sb.from("expenses").insert({
-        user_id: currentUser.id, name, amount, date, category, repetition
-      });
+      user_id: currentUser.id, title: name, amount, category, date
+        });
  
       if (error) { showMsg(error.message, "danger"); return; }
       showMsg("Expense added successfully! ✅", "success");

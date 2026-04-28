@@ -122,10 +122,11 @@
                   <div class="fw-bold mb-2"><span class="me-2">🎓</span>Where my money goes</div>
                   <img src="../assets/student-pie.png" alt="Pie Chart" class="img-fluid mb-2" style="max-height:220px;object-fit:contain;">
                   <div class="row small">
-                    <div class="col-6">Food: $4000</div>
-                    <div class="col-6">Books: $2500</div>
-                    <div class="col-6">Transport: $3000</div>
-                    <div class="col-6">Leisure: $3000</div>
+                    <!-- replace hardcoded values -->
+                    <div class="fw-bold fs-3" id="s-total">$0.00</div>
+                    <div class="fw-bold fs-3" id="s-topcat">—</div>
+                    <div class="fw-bold fs-3" id="s-avgdaily">$0.00</div>
+                    <div class="fw-bold fs-3" id="s-saved">$0.00</div>
                   </div>
                 </div>
               </div>
@@ -188,11 +189,10 @@
                   <div class="mb-2">Where my money goes</div>
                   <img src="../assets/general-pie.png" alt="Pie Chart" class="img-fluid mb-2" style="max-height:220px;object-fit:contain;">
                   <div class="row small">
-                    <div class="col-6">Housing: $2850.00</div>
-                    <div class="col-6">Bills: $650.00</div>
-                    <div class="col-6">Food: $2850.00</div>
-                    <div class="col-6">Transport: $95.00</div>
-                    <div class="col-6">Other: $55.00</div>
+                    <div class="fw-bold fs-3" id="g-total">$0.00</div>
+                     <div class="fw-bold fs-3" id="g-topcat">—</div>
+                    <div class="fw-bold fs-3" id="g-avgdaily">$0.00</div>
+                    <div class="fw-bold fs-3" id="g-billspct">0%</div>
                   </div>
                 </div>
               </div>
@@ -249,5 +249,159 @@
     // Optionally store mood for navigation
     localStorage.setItem('mood', mood);
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const sb = supabase.createClient(
+    "https://zwziuzioivscsslccncl.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
+  )
+
+  const COLORS = ["#2dd4bf","#38bdf8","#f87171","#fbbf24","#a78bfa","#34d399","#fb923c"]
+
+  document.addEventListener("DOMContentLoaded", async () => {
+
+    // ── Auth ──
+    const { data: { user } } = await sb.auth.getUser()
+    if (!user) { window.location.href = "login.html"; return }
+
+    // ── Load profile + mood ──
+    const { data: profile } = await sb.from("users").select("name,email,mode").eq("id", user.id).single()
+    if (profile) {
+      document.querySelectorAll(".profile-heading").forEach(el => el.innerText = profile.name || "")
+      document.querySelectorAll(".mb-0.text-muted").forEach(el => {
+        if (el.innerText.includes("john@")) el.innerText = profile.email || user.email
+      })
+      document.querySelectorAll("h6.mb-0.fw-bold, h5.mb-1").forEach(el => {
+        if (el.innerText === "John Doe") el.innerText = profile.name || ""
+      })
+    }
+
+    // ── Show correct report based on mode ──
+    const mood = profile?.mode || "general"
+    if (mood === "student") {
+      document.getElementById("student-report").classList.remove("d-none")
+      document.getElementById("general-report").classList.add("d-none")
+    } else {
+      document.getElementById("general-report").classList.remove("d-none")
+      document.getElementById("student-report").classList.add("d-none")
+    }
+
+    // ── Logout ──
+    document.querySelectorAll("a.text-danger").forEach(el => {
+      el.addEventListener("click", async (e) => {
+        e.preventDefault()
+        await sb.auth.signOut()
+        window.location.href = "../index.html"
+      })
+    })
+
+    // ── Fetch this month's expenses ──
+    const now = new Date()
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split("T")[0]
+    const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate()
+
+    const { data: expenses } = await sb
+      .from("expenses").select("*")
+      .eq("user_id", user.id)
+      .gte("date", monthStart)
+
+    const list = expenses || []
+    const totalExp = list.reduce((s, e) => s + parseFloat(e.amount), 0)
+
+    // ── Category breakdown ──
+    const catMap = {}
+    list.forEach(e => { catMap[e.category] = (catMap[e.category] || 0) + parseFloat(e.amount) })
+    const cats = Object.keys(catMap)
+    const vals = Object.values(catMap)
+    const topCategory = cats.length ? cats[vals.indexOf(Math.max(...vals))] : "—"
+    const avgDaily = (totalExp / daysInMonth).toFixed(2)
+
+    // ── Fetch income ──
+    const { data: incomes } = await sb.from("incomes").select("amount").eq("user_id", user.id)
+    const totalIncome = (incomes || []).reduce((s, i) => s + parseFloat(i.amount), 0)
+    const saved = totalIncome - totalExp
+
+    // ── Update summary cards ──
+    if (mood === "student") {
+      document.getElementById("s-total").innerText    = "$" + totalExp.toFixed(2)
+      document.getElementById("s-topcat").innerText   = topCategory
+      document.getElementById("s-avgdaily").innerText = "$" + avgDaily
+      document.getElementById("s-saved").innerText    = "$" + (saved > 0 ? saved.toFixed(2) : "0.00")
+      renderPieChart("studentPieChart", cats, vals)
+      renderBarChart("studentBarChart", list)
+    } else {
+      const billsTotal = list.filter(e => e.category === "Bills").reduce((s, e) => s + parseFloat(e.amount), 0)
+      const billsPct = totalExp > 0 ? Math.round((billsTotal / totalExp) * 100) : 0
+      document.getElementById("g-total").innerText    = "$" + totalExp.toFixed(2)
+      document.getElementById("g-topcat").innerText   = topCategory
+      document.getElementById("g-avgdaily").innerText = "$" + avgDaily
+      document.getElementById("g-billspct").innerText = billsPct + "%"
+      renderPieChart("generalPieChart", cats, vals)
+      renderBarChart("generalBarChart", list)
+      renderLineChart("generalLineChart", list)
+
+      // Category breakdown text
+      const catBreakdown = document.getElementById("g-catbreakdown")
+      if (catBreakdown) {
+        catBreakdown.innerHTML = cats.map(c => `<div class="col-6">${c}: $${catMap[c].toFixed(2)}</div>`).join("")
+      }
+    }
+  })
+
+  function renderPieChart(canvasId, labels, data) {
+    const ctx = document.getElementById(canvasId)
+    if (!ctx || !labels.length) return
+    new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels,
+        datasets: [{ data, backgroundColor: COLORS.slice(0, labels.length), borderWidth: 0 }]
+      },
+      options: { plugins: { legend: { position: "bottom" } } }
+    })
+  }
+
+  function renderBarChart(canvasId, expenses) {
+    const ctx = document.getElementById(canvasId)
+    if (!ctx) return
+    // Group by week
+    const weeks = { "Week 1": 0, "Week 2": 0, "Week 3": 0, "Week 4": 0 }
+    expenses.forEach(e => {
+      const day = new Date(e.date).getDate()
+      if (day <= 7)       weeks["Week 1"] += parseFloat(e.amount)
+      else if (day <= 14) weeks["Week 2"] += parseFloat(e.amount)
+      else if (day <= 21) weeks["Week 3"] += parseFloat(e.amount)
+      else                weeks["Week 4"] += parseFloat(e.amount)
+    })
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: Object.keys(weeks),
+        datasets: [{ label: "Spending", data: Object.values(weeks), backgroundColor: "#2dd4bf", borderRadius: 8 }]
+      },
+      options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+    })
+  }
+
+  function renderLineChart(canvasId, expenses) {
+    const ctx = document.getElementById(canvasId)
+    if (!ctx) return
+    // Group by month name
+    const monthMap = {}
+    expenses.forEach(e => {
+      const month = new Date(e.date).toLocaleString("en-US", { month: "short" })
+      monthMap[month] = (monthMap[month] || 0) + parseFloat(e.amount)
+    })
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: Object.keys(monthMap),
+        datasets: [{ label: "Spending", data: Object.values(monthMap), borderColor: "#2dd4bf", backgroundColor: "rgba(45,212,191,0.1)", tension: 0.4, fill: true }]
+      },
+      options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+    })
+  }
+</script>
 </body>
 </html>

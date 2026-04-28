@@ -148,10 +148,10 @@
       if (!data.length) { tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">No expenses found.</td></tr>'; return; }
       tbody.innerHTML = data.map(e => `
         <tr>
-          <td>${formatDate(e.date)}</td>
-          <td>${e.name}</td>
+          <td>${formatDate(e.created_at)}</td>
+          <td>${e.title}</td>
           <td>${e.category}</td>
-          <td><span class="badge bg-light text-dark border">${e.repetition || ''}</span></td>
+          <td></td>
           <td class="text-end fw-bold text-success">$${parseFloat(e.amount).toFixed(2)}</td>
           <td>
             <button class="btn btn-outline-success btn-sm me-1" onclick="openEdit('${e.id}')">✏️</button>
@@ -166,12 +166,11 @@
       let filtered = allExpenses;
       if (activeFilter !== "all") filtered = filtered.filter(e => e.repetition === activeFilter);
       if (cat) filtered = filtered.filter(e => e.category === cat);
-      if (search) filtered = filtered.filter(e => e.name.toLowerCase().includes(search) || e.category.toLowerCase().includes(search));
-      renderTable(filtered);
+      if (search) filtered = filtered.filter(e => e.title.toLowerCase().includes(search) || e.category.toLowerCase().includes(search));
     }
  
     async function loadExpenses() {
-      const { data, error } = await sb.from("expenses").select("*").eq("user_id", currentUser.id).order("date", {ascending:false});
+      const { data, error } = await sb.from("expenses").select("*").eq("user_id", currentUser.id).order("created_at", {ascending:false});
       if (error) { showMsg(error.message); return; }
       allExpenses = data || [];
       // Populate category filter
@@ -185,21 +184,20 @@
       const e = allExpenses.find(x => x.id === id);
       if (!e) return;
       document.getElementById("editId").value = e.id;
-      document.getElementById("editName").value = e.name;
-      document.getElementById("editAmount").value = e.amount;
-      document.getElementById("editDate").value = e.date;
-      document.getElementById("editCategory").value = e.category;
+     document.getElementById("editName").value = e.title;
+     document.getElementById("editAmount").value = e.amount;
+     document.getElementById("editDate").value = "";
+     document.getElementById("editCategory").value = e.category;
       new bootstrap.Modal(document.getElementById("editModal")).show();
     };
  
     document.getElementById("saveEditBtn").addEventListener("click", async () => {
       const id = document.getElementById("editId").value;
       const updates = {
-        name: document.getElementById("editName").value,
-        amount: parseFloat(document.getElementById("editAmount").value),
-        date: document.getElementById("editDate").value,
-        category: document.getElementById("editCategory").value
-      };
+      title: document.getElementById("editName").value,
+      amount: parseFloat(document.getElementById("editAmount").value),
+      category: document.getElementById("editCategory").value
+       };
       const { error } = await sb.from("expenses").update(updates).eq("id", id);
       if (error) { showMsg(error.message); return; }
       bootstrap.Modal.getInstance(document.getElementById("editModal")).hide();
