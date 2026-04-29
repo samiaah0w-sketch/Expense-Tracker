@@ -271,6 +271,12 @@
     async function uploadPhoto(e) {
       const file = e.target.files[0];
       if (!file) return;
+
+      if (!currentUser || !currentUser.id) {
+        showPhotoMsg("Error: User not authenticated. Please log in again.", "danger");
+        e.target.value = "";
+        return;
+      }
  
       if (file.size > 2 * 1024 * 1024) {
         showPhotoMsg("File too large. Maximum size is 2 MB.", "danger");
@@ -280,36 +286,56 @@
  
       setBusy(true);
       try {
+        console.log("Starting upload for user:", currentUser.id);
         const ext      = file.name.split(".").pop().toLowerCase();
         const filePath = `${currentUser.id}/avatar.${ext}`;
+        
+        console.log("File path:", filePath);
+        console.log("File type:", file.type);
+        console.log("File size:", file.size);
  
         // upload to Supabase Storage (upsert = overwrite old file)
-        const { error: uploadErr } = await supabaseClient.storage
+        console.log("Uploading to storage...");
+        const { data: uploadData, error: uploadErr } = await supabaseClient.storage
           .from("avatars")
           .upload(filePath, file, { upsert: true, contentType: file.type });
  
-        if (uploadErr) throw uploadErr;
+        if (uploadErr) {
+          console.error("Upload error:", uploadErr);
+          throw uploadErr;
+        }
+        
+        console.log("Upload successful:", uploadData);
  
         // get public URL with cache-bust so browser reloads the new image
+        console.log("Getting public URL...");
         const { data: urlData } = supabaseClient.storage
           .from("avatars")
           .getPublicUrl(filePath);
- 
+        
+        console.log("URL data:", urlData);
         const publicUrl = urlData.publicUrl + "?t=" + Date.now();
+        console.log("Public URL:", publicUrl);
  
         // save to users table
-        const { error: dbErr } = await supabaseClient
+        console.log("Updating user record...");
+        const { data: dbData, error: dbErr } = await supabaseClient
           .from("users")
           .update({ avatar_url: publicUrl })
           .eq("id", currentUser.id);
  
-        if (dbErr) throw dbErr;
+        if (dbErr) {
+          console.error("Database error:", dbErr);
+          throw dbErr;
+        }
+        
+        console.log("Database update successful:", dbData);
  
         setAvatarAll(publicUrl);
         showPhotoMsg("Profile photo updated ✅");
       } catch (err) {
-        console.error(err);
-        showPhotoMsg("Upload failed: " + (err.message || "unknown error"), "danger");
+        console.error("Upload failed:", err);
+        showPhotoMsg("Upload failed: " + (err.message || JSON.stringify(err)), "danger");
       } finally {
         setBusy(false);
         e.target.value = ""; // reset input so same file can be re-chosen
@@ -350,12 +376,13 @@
     // ── save profile details ───────────────────────────────────
     async function saveProfile() {
       const name     = document.querySelector("input[type='text']").value.trim();
+      const email    = document.querySelector("input[type='email']").value.trim();
       const currency = document.querySelector("select").value;
       const notify   = document.getElementById("budgetAlertSwitch").checked;
  
       const { error } = await supabaseClient
         .from("users")
-        .update({ name, currency, notify_budget: notify })
+        .update({ name, email, currency, notify_budget: notify })
         .eq("id", currentUser.id);
  
       if (error) {

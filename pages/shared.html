@@ -8,219 +8,92 @@
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body class="bg-light">
-  <!-- Mobile Sidebar (Offcanvas) -->
   <div class="offcanvas offcanvas-start mobile-sidebar" tabindex="-1" id="mobileSidebar">
-    <div class="offcanvas-header">
-      <h5 class="fw-bold">Menu</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div class="user-info">
-      <div class="d-flex align-items-center gap-3">
-        <div class="user-avatar">👤</div>
-        <div>
-          <h6 class="mb-0 fw-bold">John Doe</h6>
-          <p class="mb-0 text-muted small">john@example.com</p>
-        </div>
-      </div>
-    </div>
-    <div class="offcanvas-body">
-      <div class="nav-menu">
-        <div class="list-group list-group-flush">
-          <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
-          <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
-          <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
-          <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
-          <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
-          <a href="shared.html" class="list-group-item list-group-item-action active">Shared expenses</a>
-          <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
-          <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
-        </div>
-      </div>
-    </div>
+    <div class="offcanvas-header"><h5 class="fw-bold">Menu</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button></div>
+    <div class="user-info"><div class="d-flex align-items-center gap-3"><div class="user-avatar">👤</div><div><h6 class="mb-0 fw-bold profile-heading"></h6><p class="mb-0 text-muted small user-email"></p></div></div></div>
+    <div class="offcanvas-body"><div class="nav-menu"><div class="list-group list-group-flush">
+      <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
+      <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+      <a href="bills.html" class="list-group-item list-group-item-action">Manage Bills</a>
+      <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
+      <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
+      <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
+      <a href="shared.html" class="list-group-item list-group-item-action active">Shared expenses</a>
+      <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
+      <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
+    </div></div></div>
   </div>
-
-  <!-- Mobile Header -->
+ 
   <header class="py-2 d-lg-none fixed-top bg-white shadow-sm">
     <div class="container d-flex align-items-center justify-content-between">
       <button class="btn border-0 p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
       </button>
       <span class="fw-bold text-success">Expense Tracker</span>
-      <a href="profile.html" class="btn p-0">
-        <div style="width: 32px; height: 32px; display: grid; place-items: center; border-radius: 8px; background: rgba(45, 212, 191, 0.2); color: #0f766e;">👤</div>
-      </a>
+      <a href="profile.html" class="btn p-0"><div style="width:32px;height:32px;display:grid;place-items:center;border-radius:8px;background:rgba(45,212,191,0.2);color:#0f766e;">👤</div></a>
     </div>
   </header>
-
+ 
   <main class="profile-page py-5">
     <div class="container">
       <div class="row gy-4">
-        <!-- Sidebar -->
         <div class="col-lg-3 d-none d-lg-block">
           <div class="sidebar-panel p-4 shadow-sm">
             <div class="d-flex align-items-center gap-3 mb-4">
               <div class="profile-avatar">👤</div>
-              <div>
-                <h5 class="mb-1 profile-heading">John Doe</h5>
-                <p class="mb-0 text-muted">john@example.com</p>
-              </div>
+              <div><h5 class="mb-1 profile-heading"></h5><p class="mb-0 text-muted user-email"></p></div>
             </div>
-            <div class="sidebar-nav">
-              <div class="list-group list-group-flush">
-                <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
-                <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
-                <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
-                <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
-                <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
-                                                <a href="shared.html" class="list-group-item list-group-item-action">Shared expenses</a>
-                <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
-                <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
-              </div>
-            </div>
+            <div class="sidebar-nav"><div class="list-group list-group-flush">
+              <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
+              <a href="add-expense.html" class="list-group-item list-group-item-action">Add Expense</a>
+              <a href="history.html" class="list-group-item list-group-item-action">Expense History</a>
+              <a href="budget.html" class="list-group-item list-group-item-action">Budgets</a>
+              <a href="reports.html" class="list-group-item list-group-item-action">Reports</a>
+              <a href="shared.html" class="list-group-item list-group-item-action active">Shared expenses</a>
+              <a href="profile.html" class="list-group-item list-group-item-action">Profile</a>
+              <a href="../index.html" class="list-group-item list-group-item-action text-danger">Logout</a>
+            </div></div>
           </div>
         </div>
-
-        <!-- Main Content -->
+ 
         <div class="col-lg-9">
           <div class="profile-panel p-4 shadow-sm mb-4">
             <h2 class="fw-bold mb-1">Shared Expenses</h2>
             <p class="text-muted mb-4">Manage and track shared expenses with ease.</p>
-
+            <div id="globalMsg" class="alert d-none mb-3"></div>
+ 
             <div class="row g-4">
               <!-- Create Expense Card -->
               <div class="col-md-6">
                 <div class="card shadow-sm p-4">
-                  <h5 class="fw-bold mb-3">Create Expense Card</h5>
-                  <form>
-                    <div class="mb-3">
-                      <label for="expenseName" class="form-label">Expense Name</label>
-                      <input type="text" class="form-control" id="expenseName" placeholder="Expense Name" />
-                    </div>
-                    <div class="mb-3">
-                      <label for="amount" class="form-label">Amount ($)</label>
-                      <input type="number" class="form-control" id="amount" placeholder="$" />
-                    </div>
-                    <div class="mb-3">
-                      <label for="searchUsers" class="form-label">Search Users</label>
-                      <input type="text" class="form-control" id="searchUsers" placeholder="Search Users" />
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Selected Members</label>
-                      <div class="d-flex flex-wrap gap-2">
-                        <span class="badge bg-success">Adam Die <button type="button" class="btn-close btn-close-white btn-sm ms-2"></button></span>
-                        <span class="badge bg-success">Alex & Eli <button type="button" class="btn-close btn-close-white btn-sm ms-2"></button></span>
-                        <span class="badge bg-success">Utility <button type="button" class="btn-close btn-close-white btn-sm ms-2"></button></span>
-                      </div>
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Split Preview</label>
-                      <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                          Adam Die <span class="badge bg-success">$32.28</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                          Alex & Eli <span class="badge bg-success">$32.28</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                          Utility <span class="badge bg-success">$32.28</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <button type="submit" class="btn btn-success w-100">Add Expense</button>
-                  </form>
+                  <h5 class="fw-bold mb-3">Add Shared Expense</h5>
+                  <div class="mb-3"><label class="form-label">Expense Name</label><input type="text" id="shExpName" class="form-control" placeholder="Expense Name" /></div>
+                  <div class="mb-3"><label class="form-label">Amount ($)</label><input type="number" id="shExpAmount" class="form-control" placeholder="0.00" /></div>
+                  <div class="mb-3"><label class="form-label">Split With (names, comma-separated)</label><input type="text" id="shExpSplit" class="form-control" placeholder="e.g. Alice, Bob" /></div>
+                  <button class="btn btn-success w-100" id="addSharedBtn">Add Shared Expense</button>
                 </div>
               </div>
-
-              <!-- My Share Summary Card -->
+ 
+              <!-- Summary Card -->
               <div class="col-md-6">
                 <div class="card shadow-sm p-4">
-                  <h5 class="fw-bold mb-3">My Share Summary Card</h5>
-                  <p class="mb-2">Total Group Spending: <span class="text-success">$322.83</span></p>
-                  <p class="mb-2">You Owe: <span class="text-danger">$54.44</span></p>
-                  <p class="mb-0">You are Owed: <span class="text-success">$120.00</span></p>
+                  <h5 class="fw-bold mb-3">My Share Summary</h5>
+                  <p class="mb-2">Total Group Spending: <span class="text-success fw-bold" id="shTotal">$0.00</span></p>
+                  <p class="mb-2">My Share: <span class="text-danger fw-bold" id="shMyShare">$0.00</span></p>
+                  <p class="mb-0">Number of Expenses: <span class="fw-bold" id="shCount">0</span></p>
                 </div>
               </div>
-
-              <!-- Members List Card -->
+ 
+              <!-- Shared Expenses List -->
               <div class="col-12">
                 <div class="card shadow-sm p-4">
-                  <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="fw-bold mb-0">Members</h5>
-                    <button class="btn btn-outline-success btn-sm">+ Invite</button>
+                  <h5 class="fw-bold mb-3">Shared Expenses List</h5>
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead><tr><th>Expense Name</th><th>Date</th><th>Amount</th><th>Split With</th><th>Your Share</th><th></th></tr></thead>
+                      <tbody id="sharedTableBody"><tr><td colspan="6" class="text-center text-muted py-4">Loading...</td></tr></tbody>
+                    </table>
                   </div>
-                  <div class="row g-3">
-                    <div class="col-6 col-md-4 col-lg-3">
-                      <div class="text-center p-3 rounded-4" style="background: rgba(45, 212, 191, 0.08);">
-                        <div class="rounded-circle mx-auto mb-2" style="width: 48px; height: 48px; background: #0f766e; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">AD</div>
-                        <h6 class="mb-0">Adam Die</h6>
-                        <small class="text-muted">$120.00</small>
-                      </div>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-3">
-                      <div class="text-center p-3 rounded-4" style="background: rgba(45, 212, 191, 0.08);">
-                        <div class="rounded-circle mx-auto mb-2" style="width: 48px; height: 48px; background: #0f766e; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">A</div>
-                        <h6 class="mb-0">Alex</h6>
-                        <small class="text-muted">$80.00</small>
-                      </div>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-3">
-                      <div class="text-center p-3 rounded-4" style="background: rgba(45, 212, 191, 0.08);">
-                        <div class="rounded-circle mx-auto mb-2" style="width: 48px; height: 48px; background: #0f766e; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">E</div>
-                        <h6 class="mb-0">Eli</h6>
-                        <small class="text-muted">$80.00</small>
-                      </div>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-3">
-                      <div class="text-center p-3 rounded-4" style="background: rgba(45, 212, 191, 0.08);">
-                        <div class="rounded-circle mx-auto mb-2" style="width: 48px; height: 48px; background: #0f766e; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">U</div>
-                        <h6 class="mb-0">Utility</h6>
-                        <small class="text-muted">$42.83</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Shared Expenses List Card -->
-              <div class="col-12">
-                <div class="card shadow-sm p-4">
-                  <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="fw-bold mb-0">Shared Expenses List Card</h5>
-                    <button class="btn btn-outline-success btn-sm">Settle Balance</button>
-                  </div>
-                  <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Search" />
-                  </div>
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>Expense Name</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Split</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Internet Bill</td>
-                        <td>01/22</td>
-                        <td>$80.00</td>
-                        <td>Alex $80.00</td>
-                      </tr>
-                      <tr>
-                        <td>Dinner Out</td>
-                        <td>01/22</td>
-                        <td>$150.00</td>
-                        <td>Alex & Eli, $80.00</td>
-                      </tr>
-                      <tr>
-                        <td>Utilities</td>
-                        <td>01/22</td>
-                        <td>$210.00</td>
-                        <td>$80.00</td>
-                      </tr>
-                    </tbody>
-                  </table>
                 </div>
               </div>
             </div>
@@ -229,139 +102,89 @@
       </div>
     </div>
   </main>
-
+ 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const sb = supabase.createClient(
-    "https://zwziuzioivscsslccncl.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
-  )
-
-  let currentUser = null
-
-  // ── Load shared expenses from Supabase ──
-  async function loadShared() {
-    const { data, error } = await sb
-      .from("shared_expenses")
-      .select("*")
-      .eq("created_by", currentUser.id)
-      .order("id", { ascending: false })
-
-    const list = data || []
-
-    // Summary
-    const total = list.reduce((s, e) => s + parseFloat(e.amount), 0)
-    const settled = list.filter(e => e.is_settled).reduce((s, e) => s + parseFloat(e.amount), 0)
-    const unsettled = total - settled
-
-    document.getElementById("totalSpending").innerText = "$" + total.toFixed(2)
-    document.getElementById("youOwe").innerText        = "$" + unsettled.toFixed(2)
-    document.getElementById("youAreOwed").innerText    = "$" + settled.toFixed(2)
-
-    // Table
-    const tbody = document.getElementById("sharedTableBody")
-    if (!list.length) {
-      tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted py-3">No shared expenses yet.</td></tr>'
-      return
+  <script>
+    const sb = supabase.createClient(
+      "https://zwziuzioivscsslccncl.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
+    );
+    let currentUser = null;
+ 
+    function showMsg(text, type="danger") {
+      const b = document.getElementById("globalMsg");
+      b.className = "alert alert-" + type;
+      b.innerText = text;
+      b.classList.remove("d-none");
+      setTimeout(() => b.classList.add("d-none"), 3000);
     }
-    tbody.innerHTML = list.map(e => `
-      <tr>
-        <td>${e.description}</td>
-        <td>${new Date(e.id).toLocaleDateString() || '—'}</td>
-        <td>$${parseFloat(e.amount).toFixed(2)}</td>
-        <td>
-          ${e.member_name}
-          ${!e.is_settled
-            ? `<button class="btn btn-success btn-sm ms-2" onclick="settle('${e.id}')">Settle</button>`
-            : `<span class="badge bg-success ms-2">Settled</span>`}
-          <button class="btn btn-outline-danger btn-sm ms-1" onclick="deleteShared('${e.id}')">🗑️</button>
-        </td>
-      </tr>`).join("")
-
-    // Members list
-    const members = [...new Set(list.map(e => e.member_name))]
-    document.getElementById("membersList").innerHTML = members.map(m => {
-      const initials = m.split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2)
-      const memberTotal = list.filter(e => e.member_name === m).reduce((s, e) => s + parseFloat(e.amount), 0)
-      return `
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="text-center p-3 rounded-4" style="background:rgba(45,212,191,0.08);">
-            <div class="rounded-circle mx-auto mb-2" style="width:48px;height:48px;background:#0f766e;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;">${initials}</div>
-            <h6 class="mb-0">${m}</h6>
-            <small class="text-muted">$${memberTotal.toFixed(2)}</small>
-          </div>
-        </div>`
-    }).join("")
-  }
-
-  // ── Add shared expense ──
-  document.querySelector("form").addEventListener("submit", async (e) => {
-    e.preventDefault()
-
-    const description = document.getElementById("expenseName").value.trim()
-    const amount      = parseFloat(document.getElementById("amount").value)
-    const member_name = document.getElementById("searchUsers").value.trim()
-
-    if (!description || !amount || !member_name) {
-      alert("Please fill in expense name, amount and member name.")
-      return
+ 
+    async function loadShared() {
+      const { data, error } = await sb.from("shared_expenses").select("*").eq("user_id", currentUser.id).order("created_at", {ascending:false});
+      const list = data || [];
+      const total = list.reduce((s,e) => s+parseFloat(e.amount), 0);
+      const myShare = list.reduce((s,e) => {
+        const parts = e.split_with ? e.split_with.split(",").length + 1 : 1;
+        return s + parseFloat(e.amount) / parts;
+      }, 0);
+      document.getElementById("shTotal").innerText = "$"+total.toFixed(2);
+      document.getElementById("shMyShare").innerText = "$"+myShare.toFixed(2);
+      document.getElementById("shCount").innerText = list.length;
+ 
+      const tbody = document.getElementById("sharedTableBody");
+      if (!list.length) { tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">No shared expenses yet.</td></tr>'; return; }
+      tbody.innerHTML = list.map(e => {
+        const parts = e.split_with ? e.split_with.split(",").length + 1 : 1;
+        const myAmt = (parseFloat(e.amount) / parts).toFixed(2);
+        return `<tr>
+          <td>${e.name}</td>
+          <td>${e.date || "—"}</td>
+          <td>$${parseFloat(e.amount).toFixed(2)}</td>
+          <td>${e.split_with || "—"}</td>
+          <td class="fw-semibold text-success">$${myAmt}</td>
+          <td><button class="btn btn-outline-danger btn-sm" onclick="deleteShared('${e.id}')">🗑️</button></td>
+        </tr>`;
+      }).join("");
     }
-
-    const { error } = await sb.from("shared_expenses").insert({
-      created_by:  currentUser.id,
-      description,
-      amount,
-      member_name,
-      is_settled:  false
-    })
-
-    if (error) { alert(error.message); return }
-
-    document.querySelector("form").reset()
-    await loadShared()
-  })
-
-  // ── Settle expense ──
-  window.settle = async function(id) {
-    await sb.from("shared_expenses").update({ is_settled: true }).eq("id", id)
-    await loadShared()
-  }
-
-  // ── Delete expense ──
-  window.deleteShared = async function(id) {
-    if (!confirm("Delete this shared expense?")) return
-    await sb.from("shared_expenses").delete().eq("id", id)
-    await loadShared()
-  }
-
-  // ── Init ──
-  document.addEventListener("DOMContentLoaded", async () => {
-    const { data: { user } } = await sb.auth.getUser()
-    if (!user) { window.location.href = "login.html"; return }
-    currentUser = user
-
-    // Load profile in sidebar
-    const { data } = await sb.from("users").select("name,email").eq("id", user.id).single()
-    if (data) {
-      document.querySelectorAll(".profile-heading").forEach(el => el.innerText = data.name || "")
-      document.querySelectorAll("p.mb-0.text-muted.small, p.mb-0.text-muted")
-        .forEach(el => { if (el.innerText.includes("@") || el.innerText === "john@example.com") el.innerText = data.email || user.email })
-      document.querySelectorAll("h5.mb-1, h6.mb-0.fw-bold")
-        .forEach(el => { if (el.innerText === "John Doe") el.innerText = data.name || "" })
-    }
-
-    // Logout
-    document.querySelectorAll("a.text-danger").forEach(el => {
-      el.addEventListener("click", async (e) => {
-        e.preventDefault()
-        await sb.auth.signOut()
-        window.location.href = "../index.html"
-      })
-    })
-
-    await loadShared()
-  })
-</script>
+ 
+    window.deleteShared = async function(id) {
+      if (!confirm("Delete?")) return;
+      await sb.from("shared_expenses").delete().eq("id", id);
+      showMsg("Deleted ✅", "success");
+      await loadShared();
+    };
+ 
+    document.getElementById("addSharedBtn").addEventListener("click", async () => {
+      const name = document.getElementById("shExpName").value.trim();
+      const amount = parseFloat(document.getElementById("shExpAmount").value);
+      const split_with = document.getElementById("shExpSplit").value.trim();
+      if (!name || !amount) { showMsg("Enter name and amount."); return; }
+      const { error } = await sb.from("shared_expenses").insert({
+        user_id: currentUser.id, name, amount, split_with, date: new Date().toISOString().split("T")[0]
+      });
+      if (error) { showMsg(error.message); return; }
+      document.getElementById("shExpName").value = "";
+      document.getElementById("shExpAmount").value = "";
+      document.getElementById("shExpSplit").value = "";
+      showMsg("Added ✅", "success");
+      await loadShared();
+    });
+ 
+    document.addEventListener("DOMContentLoaded", async () => {
+      const { data: { user } } = await sb.auth.getUser();
+      if (!user) { window.location.href = "login.html"; return; }
+      currentUser = user;
+      const { data } = await sb.from("users").select("name,email").eq("id",user.id).single();
+      if (data) {
+        document.querySelectorAll(".profile-heading").forEach(el => el.innerText = data.name || "");
+        document.querySelectorAll(".user-email").forEach(el => el.innerText = data.email || user.email || "");
+      }
+      document.querySelectorAll("a.text-danger").forEach(el => {
+        el.addEventListener("click", async (e) => { e.preventDefault(); await sb.auth.signOut(); window.location.href = "../index.html"; });
+      });
+      await loadShared();
+    });
+  </script>
 </body>
 </html>

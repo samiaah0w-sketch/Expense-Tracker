@@ -120,114 +120,157 @@
   </div>
  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    const sb = supabase.createClient(
-      "https://zwziuzioivscsslccncl.supabase.co",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
-    );
-    let currentUser = null;
- 
-    function showMsg(id, text, type="danger") {
-      const b = document.getElementById(id);
-      b.className = "alert alert-" + type;
-      b.innerText = text;
-      b.classList.remove("d-none");
-      setTimeout(() => b.classList.add("d-none"), 3000);
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const sb = supabase.createClient(
+    "https://zwziuzioivscsslccncl.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
+  )
+  let currentUser = null
+
+  function showMsg(id, text, type = "danger") {
+    const b = document.getElementById(id)
+    b.className = "alert alert-" + type
+    b.innerText = text
+    b.classList.remove("d-none")
+    setTimeout(() => b.classList.add("d-none"), 3000)
+  }
+
+  function statusBadge(status) {
+    const map = { Paid: "bg-success", Pending: "bg-secondary", "Due Soon": "bg-warning text-dark", Overdue: "bg-danger" }
+    return `<span class="badge ${map[status] || "bg-secondary"}">${status}</span>`
+  }
+
+  function getStatus(bill) {
+    if (bill.status === "Paid") return "Paid"
+    const today = new Date(); today.setHours(0,0,0,0)
+    const due   = new Date(bill.due_date); due.setHours(0,0,0,0)
+    const diff  = (due - today) / 86400000
+    if (diff < 0)  return "Overdue"   // overdue
+    if (diff <= 3) return "Due Soon"
+    return "Pending"
+  }
+
+  async function loadBills() {
+    const { data, error } = await sb
+      .from("bills").select("*")
+      .eq("user_id", currentUser.id)
+      .order("due_date")
+
+    if (error) { showMsg("msgBox", error.message); return }
+    const bills = data || []
+
+    // ── Summary cards ──
+    const paid    = bills.filter(b => b.status === "Paid")
+    const unpaid  = bills.filter(b => b.status !== "Paid")
+    const dueSoon = unpaid.filter(b => getStatus(b) === "Due Soon")
+
+    document.getElementById("totalBills").innerText   = bills.length
+    document.getElementById("paidCount").innerText    = paid.length
+    document.getElementById("paidAmount").innerText   = "$" + paid.reduce((s,b) => s + parseFloat(b.amount), 0).toFixed(2)
+    document.getElementById("unpaidCount").innerText  = unpaid.length
+    document.getElementById("unpaidAmount").innerText = "$" + unpaid.reduce((s,b) => s + parseFloat(b.amount), 0).toFixed(2)
+    document.getElementById("dueSoonCount").innerText = dueSoon.length
+
+    // ── Table ──
+    const tbody = document.getElementById("billsTableBody")
+    if (!bills.length) {
+      tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">No bills yet. Add your first bill!</td></tr>'
+      return
     }
- 
-    function statusBadge(status) {
-      const map = { Paid: "bg-success", Pending: "bg-secondary", "Due Soon": "bg-warning text-dark" };
-      return `<span class="badge ${map[status] || 'bg-secondary'}">${status}</span>`;
+
+    tbody.innerHTML = bills.map(b => {
+      const status = getStatus(b)
+      const formattedDate = new Date(b.due_date).toLocaleDateString("en-US", { month:"short", day:"numeric", year:"numeric" })
+      const actionBtn = b.status === "Paid"
+        ? `<button class="btn btn-sm btn-outline-secondary" onclick="deleteBill('${b.id}')">🗑️ Delete</button>`
+        : `<button class="btn btn-sm btn-outline-success" onclick="markPaid('${b.id}')">✅ Pay Now</button>
+           <button class="btn btn-sm btn-outline-danger ms-1" onclick="deleteBill('${b.id}')">🗑️</button>`
+
+      return `<tr>
+        <td class="ps-4 fw-semibold">${b.bill_name || "—"}</td>
+        <td>${b.category || "—"}</td>
+        <td>$${parseFloat(b.amount).toFixed(2)}</td>
+        <td>${formattedDate}</td>
+        <td>${statusBadge(status)}</td>
+        <td>${actionBtn}</td>
+      </tr>`
+    }).join("")
+  }
+
+  // ── Mark as paid ──
+  window.markPaid = async function(id) {
+    const { error } = await sb.from("bills").update({ status: "Paid" }).eq("id", id)
+    if (error) { showMsg("msgBox", error.message); return }
+    showMsg("msgBox", "Marked as paid ✅", "success")
+    await loadBills()
+  }
+
+  // ── Delete bill ──
+  window.deleteBill = async function(id) {
+    if (!confirm("Delete this bill?")) return
+    const { error } = await sb.from("bills").delete().eq("id", id)
+    if (error) { showMsg("msgBox", error.message); return }
+    showMsg("msgBox", "Deleted ✅", "success")
+    await loadBills()
+  }
+
+  // ── Add bill ──
+  document.getElementById("saveBillBtn").addEventListener("click", async () => {
+    const bill_name = document.getElementById("billName").value.trim()
+    const category  = document.getElementById("billCategory").value
+    const amount    = parseFloat(document.getElementById("billAmount").value)
+    const due_date  = document.getElementById("billDueDate").value
+
+    if (!bill_name || !category || !amount || !due_date) {
+      showMsg("modalMsg", "Please fill all fields.")
+      return
     }
- 
-    function getDueSoonStatus(dueDate) {
-      const today = new Date(); today.setHours(0,0,0,0);
-      const due = new Date(dueDate); due.setHours(0,0,0,0);
-      const diff = (due - today) / 86400000;
-      if (diff < 0) return "Pending";
-      if (diff <= 3) return "Due Soon";
-      return "Pending";
+
+    const { error } = await sb.from("bills").insert({
+      user_id: currentUser.id,
+      bill_name,
+      category,
+      amount,
+      due_date,
+      status: "Pending"
+    })
+
+    if (error) { showMsg("modalMsg", error.message); return }
+
+    // Close modal + reset form
+    bootstrap.Modal.getInstance(document.getElementById("addBillModal")).hide()
+    document.getElementById("billName").value     = ""
+    document.getElementById("billCategory").value = ""
+    document.getElementById("billAmount").value   = ""
+    document.getElementById("billDueDate").value  = ""
+
+    showMsg("msgBox", "Bill added ✅", "success")
+    await loadBills()
+  })
+
+  // ── Init ──
+  document.addEventListener("DOMContentLoaded", async () => {
+    const { data: { user } } = await sb.auth.getUser()
+    if (!user) { window.location.href = "login.html"; return }
+    currentUser = user
+
+    const { data } = await sb.from("users").select("name,email").eq("id", user.id).single()
+    if (data) {
+      document.querySelectorAll(".profile-heading").forEach(el => el.innerText = data.name || "")
+      document.querySelectorAll(".user-email").forEach(el => el.innerText = data.email || user.email || "")
     }
- 
-    async function loadBills() {
-      const { data, error } = await sb.from("bills").select("*").eq("user_id", currentUser.id).order("due_date");
-      if (error) { showMsg("msgBox", error.message); return; }
-      const bills = data || [];
- 
-      // Summary
-      const paid = bills.filter(b => b.status === "Paid");
-      const unpaid = bills.filter(b => b.status !== "Paid");
-      const dueSoon = bills.filter(b => b.status !== "Paid" && getDueSoonStatus(b.due_date) === "Due Soon");
-      document.getElementById("totalBills").innerText = bills.length;
-      document.getElementById("paidCount").innerText = paid.length;
-      document.getElementById("paidAmount").innerText = "$" + paid.reduce((s,b) => s + parseFloat(b.amount), 0).toFixed(2);
-      document.getElementById("unpaidCount").innerText = unpaid.length;
-      document.getElementById("unpaidAmount").innerText = "$" + unpaid.reduce((s,b) => s + parseFloat(b.amount), 0).toFixed(2);
-      document.getElementById("dueSoonCount").innerText = dueSoon.length;
- 
-      const tbody = document.getElementById("billsTableBody");
-      if (!bills.length) { tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">No bills yet.</td></tr>'; return; }
-      tbody.innerHTML = bills.map(b => {
-        const status = b.status === "Paid" ? "Paid" : getDueSoonStatus(b.due_date) === "Due Soon" ? "Due Soon" : "Pending";
-        const actionBtn = b.status === "Paid"
-          ? `<button class="btn btn-sm btn-outline-secondary" onclick="deleteBill('${b.id}')">Delete</button>`
-          : `<button class="btn btn-sm btn-outline-success" onclick="markPaid('${b.id}')">Pay Now</button>
-             <button class="btn btn-sm btn-outline-danger ms-1" onclick="deleteBill('${b.id}')">🗑️</button>`;
-        return `<tr>
-          <td class="ps-4 fw-semibold">${b.bill_name}</td>
-          <td>${b.category}</td>
-          <td>$${parseFloat(b.amount).toFixed(2)}</td>
-          <td>${new Date(b.due_date).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}</td>
-          <td>${statusBadge(status)}</td>
-          <td>${actionBtn}</td>
-        </tr>`;
-      }).join("");
-    }
- 
-    window.markPaid = async function(id) {
-      const { error } = await sb.from("bills").update({ status: "Paid" }).eq("id", id);
-      if (error) { showMsg("msgBox", error.message); return; }
-      showMsg("msgBox", "Marked as paid ✅", "success");
-      await loadBills();
-    };
- 
-    window.deleteBill = async function(id) {
-      if (!confirm("Delete this bill?")) return;
-      const { error } = await sb.from("bills").delete().eq("id", id);
-      if (error) { showMsg("msgBox", error.message); return; }
-      showMsg("msgBox", "Deleted ✅", "success");
-      await loadBills();
-    };
- 
-    document.getElementById("saveBillBtn").addEventListener("click", async () => {
-      const name = document.getElementById("billName").value.trim();
-      const category = document.getElementById("billCategory").value;
-      const amount = parseFloat(document.getElementById("billAmount").value);
-      const due_date = document.getElementById("billDueDate").value;
-      const recurrence = document.getElementById("billRecurrence").value;
-      if (!name || !category || !amount || !due_date) { showMsg("modalMsg", "Fill all fields."); return; }
-      const { error } = await sb.from("bills").insert({ user_id: currentUser.id, bill_name: name, category, amount, due_date, status: "Pending" });
-      if (error) { showMsg("modalMsg", error.message); return; }
-      bootstrap.Modal.getInstance(document.getElementById("addBillModal")).hide();
-      showMsg("msgBox", "Bill added ✅", "success");
-      await loadBills();
-    });
- 
-    document.addEventListener("DOMContentLoaded", async () => {
-      const { data: { user } } = await sb.auth.getUser();
-      if (!user) { window.location.href = "login.html"; return; }
-      currentUser = user;
-      const { data } = await sb.from("users").select("name,email").eq("id", user.id).single();
-      if (data) {
-        document.querySelectorAll(".profile-heading").forEach(el => el.innerText = data.name || "");
-        document.querySelectorAll(".user-email").forEach(el => el.innerText = data.email || user.email || "");
-      }
-      document.querySelectorAll("a.text-danger").forEach(el => {
-        el.addEventListener("click", async (e) => { e.preventDefault(); await sb.auth.signOut(); window.location.href = "../index.html"; });
-      });
-      await loadBills();
-    });
-  </script>
+
+    document.querySelectorAll("a.text-danger").forEach(el => {
+      el.addEventListener("click", async (e) => {
+        e.preventDefault()
+        await sb.auth.signOut()
+        window.location.href = "../index.html"
+      })
+    })
+
+    await loadBills()
+  })
+</script>
 </body>
 </html>

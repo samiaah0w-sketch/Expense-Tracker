@@ -242,7 +242,7 @@
       }
  
       const { error } = await sb.from("expenses").insert({
-      user_id: currentUser.id, title: name, amount, category, date
+      user_id: currentUser.id, title: name, amount, category, date, repetition: repetition
         });
  
       if (error) { showMsg(error.message, "danger"); return; }

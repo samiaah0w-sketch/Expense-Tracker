@@ -18,8 +18,8 @@
       <div class="d-flex align-items-center gap-3">
         <div class="user-avatar">👤</div>
         <div>
-          <h6 class="mb-0 fw-bold">John Doe</h6>
-          <p class="mb-0 text-muted small">john@example.com</p>
+          <h6 class="mb-0 fw-bold profile-heading"></h6>
+          <p class="mb-0 text-muted small user-email"></p>
         </div>
       </div>
     </div>
@@ -61,8 +61,8 @@
             <div class="d-flex align-items-center gap-3 mb-4">
               <div class="profile-avatar">👤</div>
               <div>
-                <h5 class="mb-1 profile-heading">John Doe</h5>
-                <p class="mb-0 text-muted">john@example.com</p>
+                <h5 class="mb-1 profile-heading"></h5>
+                <p class="mb-0 text-muted user-email"></p>
               </div>
             </div>
             <div class="sidebar-nav">
@@ -120,7 +120,7 @@
               <div class="col-md-6">
                 <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
                   <div class="fw-bold mb-2"><span class="me-2">🎓</span>Where my money goes</div>
-                  <img src="../assets/student-pie.png" alt="Pie Chart" class="img-fluid mb-2" style="max-height:220px;object-fit:contain;">
+                  <canvas id="studentPieChart" style="max-height:220px;"></canvas>
                   <div class="row small">
                     <!-- replace hardcoded values -->
                     <div class="fw-bold fs-3" id="s-total">$0.00</div>
@@ -133,7 +133,7 @@
               <div class="col-md-6">
                 <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
                   <div class="fw-bold mb-2">Weekly vs Monthly Spending</div>
-                  <img src="../assets/student-bar.png" alt="Bar Chart" class="img-fluid mb-2" style="max-height:220px;object-fit:contain;">
+                  <canvas id="studentBarChart" style="max-height:220px;"></canvas>
                 </div>
               </div>
             </div>
@@ -171,7 +171,7 @@
               </div>
               <div class="col-md-3">
                 <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
-                  <div class="text-muted small">Average Daily Spnd:</div>
+                  <div class="text-muted small">Average Daily Spend:</div>
                   <div class="fw-bold fs-3">$95.00</div>
                 </div>
               </div>
@@ -187,7 +187,7 @@
                 <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
                   <div class="fw-bold mb-2">Section 1 — Expense by Category</div>
                   <div class="mb-2">Where my money goes</div>
-                  <img src="../assets/general-pie.png" alt="Pie Chart" class="img-fluid mb-2" style="max-height:220px;object-fit:contain;">
+                  <canvas id="generalPieChart" style="max-height:220px;"></canvas>
                   <div class="row small">
                     <div class="fw-bold fs-3" id="g-total">$0.00</div>
                      <div class="fw-bold fs-3" id="g-topcat">—</div>
@@ -200,16 +200,16 @@
                 <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
                   <div class="fw-bold mb-2">Section 2 — Weekly vs Monthly Spending</div>
                   <div class="mb-2">Am I overspending this week?</div>
-                  <img src="../assets/general-bar.png" alt="Bar Chart" class="img-fluid mb-2" style="max-height:220px;object-fit:contain;">
+                  <canvas id="generalBarChart" style="max-height:220px;"></canvas>
                 </div>
               </div>
             </div>
             <div class="row g-3 mb-3">
               <div class="col-md-6">
                 <div class="p-3 rounded-4 bg-white shadow-sm mb-2">
-                  <div class="fw-bold mb-2">Section 3 — General Extrmary</div>
-                  <div class="mb-2">How I spent the whie year</div>
-                  <img src="../assets/general-line.png" alt="Line Chart" class="img-fluid mb-2" style="max-height:220px;object-fit:contain;">
+                  <div class="fw-bold mb-2">Section 3 — General Expenditure</div>
+                  <div class="mb-2">How I spent the whole year</div>
+                  <canvas id="generalLineChart" style="max-height:220px;"></canvas>
                 </div>
               </div>
             </div>
@@ -228,26 +228,68 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    // Mood detection logic
+    const sb = supabase.createClient(
+      "https://zwziuzioivscsslccncl.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3eml1emlvaXZzY3NzbGNjbmNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjEyNTMsImV4cCI6MjA5Mjc5NzI1M30.Hd5prLont0ML2jO5Upt1LrFgtRoP9UpsVW31qmIy6js"
+    );
+    let currentUser = null;
+
     function getMood() {
-      // Try to get from URL first
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.has('mood')) return urlParams.get('mood');
-      // Try to get from localStorage
       if (localStorage.getItem('mood')) return localStorage.getItem('mood');
       return 'general';
     }
-    const mood = getMood();
-    if (mood === 'student') {
-      document.getElementById('student-report').classList.remove('d-none');
-      document.getElementById('general-report').classList.add('d-none');
-    } else {
-      document.getElementById('general-report').classList.remove('d-none');
-      document.getElementById('student-report').classList.add('d-none');
+
+    async function loadReportData() {
+      const { data: { user } } = await sb.auth.getUser();
+      if (!user) { window.location.href = "login.html"; return; }
+      currentUser = user;
+
+      const { data: profile } = await sb.from("users").select("name,email").eq("id", user.id).single();
+      if (profile) {
+        document.querySelectorAll(".profile-heading").forEach(el => el.innerText = profile.name || "");
+        document.querySelectorAll(".user-email").forEach(el => el.innerText = profile.email || user.email || "");
+      }
+
+      const now = new Date();
+      const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split("T")[0];
+      const { data: expenses } = await sb.from("expenses").select("*").eq("user_id", user.id).gte("date", monthStart);
+      const expList = expenses || [];
+
+      if (expList.length === 0) {
+        document.querySelectorAll(".fw-bold.fs-3").forEach(el => el.innerText = "No data");
+        return;
+      }
+
+      const totalExp = expList.reduce((s, e) => s + parseFloat(e.amount || 0), 0);
+      const avgDaily = totalExp / new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+      
+      const catMap = {};
+      expList.forEach(e => { catMap[e.category] = (catMap[e.category] || 0) + parseFloat(e.amount || 0); });
+      const topCat = Object.keys(catMap).length > 0 ? Object.entries(catMap).sort((a, b) => b[1] - a[1])[0][0] : "—";
+
+      document.getElementById("s-total").innerText = "$" + totalExp.toFixed(2);
+      document.getElementById("s-topcat").innerText = topCat;
+      document.getElementById("s-avgdaily").innerText = "$" + avgDaily.toFixed(2);
+      document.getElementById("g-total").innerText = "$" + totalExp.toFixed(2);
+      document.getElementById("g-topcat").innerText = topCat;
+      document.getElementById("g-avgdaily").innerText = "$" + avgDaily.toFixed(2);
     }
-    // Optionally store mood for navigation
-    localStorage.setItem('mood', mood);
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      await loadReportData();
+      const mood = getMood();
+      if (mood === 'student') {
+        document.getElementById('student-report').classList.remove('d-none');
+        document.getElementById('general-report').classList.add('d-none');
+      } else {
+        document.getElementById('general-report').classList.remove('d-none');
+        document.getElementById('student-report').classList.add('d-none');
+      }
+      localStorage.setItem('mood', mood);
   </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
